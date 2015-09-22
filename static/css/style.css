@@ -7,3 +7,21 @@ html, body {
 body {
   width: 800px;
   margin: 0 auto; }
+
+h1 a {
+  color: black;
+  text-decoration: none; }
+
+#register {
+  overflow: auto; }
+  #register label, #register input {
+    float: left;
+    width: 150px; }
+  #register label {
+    clear: left; }
+  #register input[type="submit"] {
+    clear: left;
+    margin-left: 150px; }
+
+footer #authors {
+  float: right; }

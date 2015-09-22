@@ -9,3 +9,28 @@ body {
   width: 800px;
   margin: 0 auto;
 }
+
+h1 a {
+  color: black;
+  text-decoration: none;
+}
+
+// LOGIN
+#register {
+  overflow: auto;
+
+  label, input {
+    float: left;
+    width: 150px;
+  }
+  label { clear: left; }
+  input[type="submit"] {
+    clear: left;
+    margin-left: 150px;
+  }
+}
+
+// FOOTER
+footer #authors {
+  float: right;
+}

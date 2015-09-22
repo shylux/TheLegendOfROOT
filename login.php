@@ -1,8 +1,9 @@
-<div id="login">
-  <form method="POST">
-    <input name="username" type="text" placeholder="Username" />
-    <input name="password" type="password" />
-    <input type="submit" value="Login" />
-  </form>
-  <a href="/register.php">Register</a>
-</div>
+<?php
+
+// TODO: Check db and set session
+
+$redirect = "/";
+if (isset($_SERVER["HTTP_REFERER"]))
+  $redirect = $_SERVER["HTTP_REFERER"];
+
+header("Location: ".$redirect);
