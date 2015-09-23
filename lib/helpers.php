@@ -6,3 +6,7 @@ function require_params(...$list_of_params) {
     if (!array_key_exists($param, $_REQUEST) || strlen($_REQUEST[$param]) == 0) return false;
   return true;
 }
+
+function salt_hash($input) {
+  return hash("md5", "TheLegendOfRoot".$input);
+}

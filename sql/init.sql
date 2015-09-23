@@ -1,6 +1,5 @@
 CREATE TABLE users (
-  id INT PRIMARY KEY NOT NULL,
-  name TEXT NOT NULL,
+  name TEXT PRIMARY KEY NOT NULL,
   email TEXT NOT NULL,
   pass_hash TEXT NOT NULL
 );

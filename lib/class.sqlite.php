@@ -56,7 +56,7 @@ class SQLITE extends SQLite3 {
       return false;
     }
 
-    $sql = "SELECT " . implode("','", $desired) . " FROM '{$table}'";
+    $sql = "SELECT " . implode(",", $desired) . " FROM '{$table}'";
     $sql .= ( $where === false ) ? '' : " WHERE " . implode(' AND ', $this->buildUpdateCondition($where)) ;
 
     $result = parent::query($sql);
@@ -164,3 +164,5 @@ class SQLITE extends SQLite3 {
     return $preparedData;
   }
 }
+
+$db = new SQLITE("/Users/lukas/projects/TheLegendOfROOT/root.db");
