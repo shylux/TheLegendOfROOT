@@ -1,4 +1,11 @@
-<?php require "header.php" ?>
+<?php
+require "header.php";
+
+if (require_params("username", "email", "password")) {
+  #TODO save
+  ?><h1>YAAAAAY</h1><?php
+}
+?>
 
 <h2>Register</h2>
 

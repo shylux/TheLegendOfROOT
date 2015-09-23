@@ -1,3 +1,4 @@
+<?php require_once "lib/requires.php" ?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
