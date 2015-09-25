@@ -24,7 +24,6 @@ class Paginator {
 		$j = 0;
 		for ( $i = 0; $i < count($fetchedData); $i++ ) {
 			$modulo += ( $j %  $this->paginationResultsPerPage === 0 && $j != 0 ) ? 1 : 0 ;
-			echo $modulo;
 			$pagedData[$modulo][] = $fetchedData[$i];
 			$j++;
 		}
