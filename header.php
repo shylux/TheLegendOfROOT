@@ -12,13 +12,18 @@
 <body>
   <header>
     <h1><a href="/">The Legend of ROOT</a></h1>
+
     <div id="login">
+      <?php if (isset($_SESSION["user"])) { ?>
+      <span>Loggid in as: <span><?=$_SESSION["user"]->name?></span><a href="logout.php">Logout</a></span>
+      <?php } else { ?>
       <form action="login.php" method="POST">
         <input name="username" type="text" placeholder="Username" />
         <input name="password" type="password" placeholder="Password" />
         <input type="submit" value="Login" />
       </form>
       <a href="/register.php">Register</a>
+      <?php } ?>
     </div>
   </header>
   <div id="content">

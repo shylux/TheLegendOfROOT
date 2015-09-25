@@ -7,6 +7,8 @@ class User {
   public $pass_hash;
 
   public static function create($username, $email, $password) {
+    if ($GLOBALS["db"]->exists("users", array("name"), array("name" => $username)))
+      return false;
     $GLOBALS["db"]->insert("users",
                 array("name" => $username,
                       "email" => $email,
@@ -23,4 +25,11 @@ class User {
     return $user;
   }
 
+  public static function login($username, $password) {
+    $user = User::load($username);
+    if ($user->pass_hash !== salt_hash($password))
+      return false;
+    $_SESSION["user"] = $user;
+    return $user;
+  }
 }

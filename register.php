@@ -3,9 +3,9 @@ require "header.php";
 
 if (require_params("username", "email", "password")) {
   $user = User::create($_REQUEST["username"], $_REQUEST["email"], $_REQUEST["password"]);
-
-  #TODO save
-  ?><h1>YAAAAAY</h1><?php
+  if ($user) {
+    $_SESSION["user"] = $user;
+  }
 }
 ?>
 

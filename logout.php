@@ -1,9 +1,7 @@
 <?php
 require_once "lib/requires.php";
 
-if (require_params("username", "password")) {
-  $user = User::login($_REQUEST["username"], $_REQUEST["password"]);
-}
+unset($_SESSION["user"]);
 
 $redirect = "/";
 if (isset($_SERVER["HTTP_REFERER"]))

@@ -50,6 +50,11 @@ class SQLITE extends SQLite3 {
     return parent::querySingle($sql);
   }
 
+  public function exists( $table, $desired, $where = false ) {
+    $amount = $this->amount( $table, $desired, $where );
+    return ($amount > 0);
+  }
+
   public function select( $table, $desired, $where = false )
   {
     if ( !is_string($table) || !is_array($desired) || ( !$this->hasTable($table) && $table !== MASTERTABLE ) ){
