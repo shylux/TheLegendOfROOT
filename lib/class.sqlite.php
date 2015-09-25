@@ -165,4 +165,4 @@ class SQLITE extends SQLite3 {
   }
 }
 
-$db = new SQLITE("/Users/lukas/projects/TheLegendOfROOT/root.db");
+$db = new SQLITE("root.db");
