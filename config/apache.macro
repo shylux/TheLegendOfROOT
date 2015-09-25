@@ -1,0 +1,15 @@
+<Macro TheLegendOfROOT $path>
+<VirtualHost *:80>
+    ServerAdmin shylux@gmail.com
+
+    DocumentRoot $path
+    <Directory "$path">
+      Options All
+      AllowOverride All
+      Require all granted
+    </Directory>
+
+    ErrorLog "$path/logs/apache_error.log"
+    CustomLog "$path/logs/apache_access.log" common
+</VirtualHost>
+</Macro>

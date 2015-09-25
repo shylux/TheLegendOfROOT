@@ -1,1 +1,4 @@
 *.db
+logs/*
+!logs/.gitkeep
+config/include.conf
