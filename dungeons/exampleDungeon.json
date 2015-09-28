@@ -1,0 +1,23 @@
+{
+  "name": "Example Dungeon",
+  "recommendedLevel": 3,
+  "width": 4,
+  "height": 3,
+  "terrain": [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0]
+  ],
+  "entities": [
+    {
+      "type": "entrance",
+      "x": 1,
+      "y": 2
+    },
+    {
+      "type": "exit",
+      "x": 2,
+      "y": 0
+    }
+  ]
+}
