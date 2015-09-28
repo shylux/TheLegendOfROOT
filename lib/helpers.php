@@ -10,3 +10,9 @@ function require_params(...$list_of_params) {
 function salt_hash($input) {
   return hash("md5", "TheLegendOfRoot".$input);
 }
+
+function apply_arr($arr, &$dest) {
+  foreach ($arr as $key => $value) {
+    $dest->{$key} = $value;
+  }
+}

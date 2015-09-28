@@ -1,4 +1,6 @@
-<?php require_once "lib/requires.php" ?>
+<?php require_once "lib/requires.php";
+echo "SESSION: "; var_dump($_SESSION);
+echo "<br />REQUEST: "; var_dump($_REQUEST); ?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -15,7 +17,7 @@
 
     <div id="login">
       <?php if (isset($_SESSION["user"])) { ?>
-      <span>Loggid in as: <span><?=$_SESSION["user"]->name?></span><a href="logout.php">Logout</a></span>
+      <span>Loggid in as: <a href="character.php"><?=$_SESSION["user"]->name?></a><a href="logout.php">Logout</a></span>
       <?php } else { ?>
       <form action="login.php" method="POST">
         <input name="username" type="text" placeholder="Username" />
