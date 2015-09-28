@@ -25,3 +25,14 @@ h1 a {
 
 footer #authors {
   float: right; }
+
+#game-container table {
+  width: 100%; }
+  #game-container table td {
+    border: 1px solid black; }
+    #game-container table td[data-terr="0"] {
+      background-color: #060; }
+    #game-container table td[data-terr="1"] {
+      background-color: #666; }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,3 +1,5 @@
+$sitewidth: 800px;
+
 html, body {
   margin: 0;
   padding: 0;
@@ -6,7 +8,7 @@ html, body {
 }
 
 body {
-  width: 800px;
+  width: $sitewidth;
   margin: 0 auto;
 }
 
@@ -33,4 +35,20 @@ h1 a {
 // FOOTER
 footer #authors {
   float: right;
+}
+
+// GAME
+#game-container {
+  table {
+    width: 100%;
+    td {
+      border: 1px solid black;
+      &[data-terr="0"] {
+        background-color: #060;
+      }
+      &[data-terr="1"] {
+        background-color: #666;
+      }
+    }
+  }
 }
