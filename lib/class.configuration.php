@@ -1,9 +1,9 @@
 <?php
-
 class Configuration {
 
 	private $configData = array();
 	private $configurationFilePath;
+	private $controlChar = '=';
 
 	public function __construct( $pathToConfigFile )
 	{
@@ -11,8 +11,6 @@ class Configuration {
 		{
 			return false;
 		}
-
-		$configFile = file($pathToConfigFile);
 		$this->configurationFilePath = $pathToConfigFile;
 		$this->loadConfiguration();
 	}
@@ -25,18 +23,18 @@ class Configuration {
 	public function getConfiguration( $property )
 	{
 		if ( count($this->configData) === 0 || $this->configData[$property] == null )
-		{
+		{ 
 			return false;
-		}
+		} 
 		return $this->configData[$property];
 	}
 
 	public function setConfiguration( $property, $value )
 	{
-		if ( count($this->configData) === 0 )
+		if ( strpos($property, $this->controlChar) !== false || strpos($value, $this->controlChar) !== false )
 		{
 			return false;
-		}
+		} 
 		$this->configData[$property] = $value;
 	}
 
@@ -50,15 +48,22 @@ class Configuration {
 	}
 
 	private function convertToConfigurationFile( )
-	{
-		// TO DO: put the configuration of the file to the $configData-array (which format?)
-		// file_put_contents ($this->configurationFilePath, $data) etc..
+	{	
+		$fp = fopen($this->configurationFilePath, 'w');
+		foreach ( $this->configData as $property => $value )
+		{
+			fwrite($fp, "{$property}{$this->controlChar}{$value}\n");
+		}
+		fclose($fp);
 	}
-
 
 	private function convertToConfigurationData( )
 	{
-		// TO DO: put the configuration of the file to the $configData-array (which format?)
+		$configFile = file($this->configurationFilePath); 
+		foreach ( $configFile as $line )
+		{
+			$tmp = explode($this->controlChar, $line);
+			$this->setConfiguration(trim($tmp[0]), trim($tmp[1]));
+		}
 	}
-
 }
