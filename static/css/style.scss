@@ -38,7 +38,7 @@ footer #authors {
 }
 
 // GAME
-#game-container {
+.game-tile {
   table {
     width: 100%;
     td {
@@ -49,6 +49,25 @@ footer #authors {
       &[data-terr="1"] {
         background-color: #666;
       }
+      &[data-terr="2"] {
+        background-color: #33ADFF;
+      }
+    }
+  }
+}
+
+// EDITOR
+#terrain-select.game-tile {
+  table {
+    width: inherit;
+    border: 5px solid black;
+  }
+  td {
+    width: 50px;
+    height: 50px;
+
+    &.selected {
+      border: 2px solid red;
     }
   }
 }

@@ -26,13 +26,24 @@ h1 a {
 footer #authors {
   float: right; }
 
-#game-container table {
+.game-tile table {
   width: 100%; }
-  #game-container table td {
+  .game-tile table td {
     border: 1px solid black; }
-    #game-container table td[data-terr="0"] {
+    .game-tile table td[data-terr="0"] {
       background-color: #060; }
-    #game-container table td[data-terr="1"] {
+    .game-tile table td[data-terr="1"] {
       background-color: #666; }
+    .game-tile table td[data-terr="2"] {
+      background-color: #33ADFF; }
+
+#terrain-select.game-tile table {
+  width: inherit;
+  border: 5px solid black; }
+#terrain-select.game-tile td {
+  width: 50px;
+  height: 50px; }
+  #terrain-select.game-tile td.selected {
+    border: 2px solid red; }
 
 /*# sourceMappingURL=style.css.map */
