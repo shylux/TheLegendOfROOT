@@ -11,6 +11,17 @@ Include <git root>/config/apache.macro
 Use TheLegendOfROOT "<git root>"
 UndefMacro TheLegendOfROOT
 ```
+### Configuration
+
+The class class.configuration.php stores the configuration object. It loads it's data from a config file - this file must exist and must be writable. To use the configuration object just do 
+
+$config = new Configuration("filePath...");
+$config->setConfiguration("key", "value"); // The key nor the value must include a '=', otherwise it will not work. In the class the control char can be set (private $controlChar).
+$config->saveConfiguration();
+
+Access data from the configuration:
+$config->getConfiguration("key");
+
 
 ## Dungeon JSON Format
 
