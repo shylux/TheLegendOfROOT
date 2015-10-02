@@ -64,7 +64,7 @@ class User {
   }
 
   public static function load($username) {
-    $user_array = $GLOBALS["db"]->select("users", array("name", "email", "pass_hash", "class", "xp", "att", "def", "agi"), array("name" => $username))[0];
+    $user_array = $GLOBALS["db"]->selectAll("users", array("name" => $username))[0];
     $user = new User();
     apply_arr($user_array, $user);
     return $user;

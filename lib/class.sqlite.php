@@ -52,15 +52,7 @@ class SQLITE extends SQLite3 {
     $sql .= ( $where === false ) ? '' : " WHERE " . implode(' AND ', $this->buildUpdateCondition($where)) ;
     $result = parent::query($sql);
     while($row = $result->fetchArray(SQLITE3_ASSOC))
-    {
-      $tmp = array();
-      foreach( $row as $key => $value ) {
-        if ( in_array($key, $desired, true) ) {
-          $tmp[$key] = $value;
-        }
-      }
-      $resultData[] = $tmp;
-        }
+      $resultData[] = $row;
     return $resultData;
   }
 
