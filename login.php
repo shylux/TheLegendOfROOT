@@ -1,5 +1,6 @@
 <?php
-require_once "lib/requires.php";
+require_once "lib/load.php";
+
 
 if (require_params("username", "password")) {
   $user = User::login($_REQUEST["username"], $_REQUEST["password"]);

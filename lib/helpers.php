@@ -16,3 +16,16 @@ function apply_arr($arr, &$dest) {
     $dest->{$key} = $value;
   }
 }
+
+// Combines parent dir with filename sent from client.
+// Throws exception if a directory traversal is detected.
+// Based on: http://stackoverflow.com/questions/4205141/preventing-directory-traversal-in-php-but-allowing-paths
+function check_filename($parentDir, $filename) {
+  $realBase = realpath($parentDir);
+  $realUserPath = realpath($parentDir . $filename);
+  if ($realUserPath === false || strpos($realUserPath, $realBase) !== 0) {
+    throw new Exception("Directory traversal attack detected!");
+  } else {
+    return $realUserPath;
+  }
+}

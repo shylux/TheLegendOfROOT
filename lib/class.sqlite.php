@@ -64,6 +64,7 @@ class SQLITE extends SQLite3 {
     $sql = "SELECT " . implode(",", $desired) . " FROM '{$table}'";
     $sql .= ( $where === false ) ? '' : " WHERE " . implode(' AND ', $this->buildUpdateCondition($where)) ;
     $result = parent::query($sql);
+    $resultData = array();
     while($row = $result->fetchArray(SQLITE3_ASSOC))
     {
       $tmp = array();
@@ -73,15 +74,17 @@ class SQLITE extends SQLite3 {
         }
       }
       $resultData[] = $tmp;
-        }
+    }
     return $resultData;
   }
   public function insert( $table, $data )
   {
-    $fields = array_keys($data);
-      if ( !is_string($table) || !is_array($data) || !$this->hasTable($table) ){
-      return false;
+    if (is_object($data)) $data = (array)$data;
+    if ( !is_string($table) || !is_array($data) || !$this->hasTable($table) ){
+      throw new Exception("SQLITE: Invalid parameter.");
     }
+    $data = $this->filterColumns($table, $data);
+    $fields = array_keys($data);
     $sql = "INSERT INTO '{$table}' ('" . implode("','", $fields) . "') VALUES (" . implode(",", $this->buildInsertCondition($data)) . ")";
     return parent::query($sql);
   }
@@ -96,10 +99,10 @@ class SQLITE extends SQLite3 {
   }
   public function update( $table, $data, $where )
   {
-    if ( !is_string($table) || !is_array($data) || !is_array($where) )
-    {
-      return false;
-    }
+    if (is_object($data)) $data = (array)$data;
+    if ( !is_string($table) || !is_array($data) || !is_array($where) ) return false;
+    $data = $this->filterColumns($table, $data);
+
     $sql = "UPDATE '{$table}' SET " . implode(', ', $this->buildUpdateCondition($data)) . " WHERE " . implode(' AND ', $this->buildUpdateCondition($where));
     return parent::query($sql);
   }
@@ -145,5 +148,15 @@ class SQLITE extends SQLite3 {
     }
     return $preparedData;
   }
+  private function filterColumns( $table_name, $data ) {
+    $tablesquery = parent::query(sprintf("PRAGMA table_info(%s);", $table_name));
+    $column_names = array();
+    while ($column = $tablesquery->fetchArray(SQLITE3_ASSOC)) {
+      $column_names[] = $column["name"];
+    }
+    foreach (array_keys($data) as $key) {
+      if (!in_array($key, $column_names)) unset($data[$key]);
+    }
+    return $data;
+  }
 }
-$db = new SQLITE("root.db");

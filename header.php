@@ -1,6 +1,7 @@
-<?php require_once "lib/requires.php";
+<?php require_once "lib/load.php";
 echo "SESSION: "; var_dump($_SESSION);
-echo "<br />REQUEST: "; var_dump($_REQUEST); ?>
+echo "<br />REQUEST: "; var_dump($_REQUEST);
+?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -17,6 +18,9 @@ echo "<br />REQUEST: "; var_dump($_REQUEST); ?>
 <body>
   <header>
     <h1><a href="/">The Legend of ROOT</a></h1>
+    <nav>
+      <a href="game.php">Dungeons</a>
+    </nav>
 
     <div id="login">
       <?php if (isset($_SESSION["user"])) { ?>

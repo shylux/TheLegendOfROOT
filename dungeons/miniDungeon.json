@@ -1,0 +1,66 @@
+{
+  "name": "Mini Dungeon",
+  "recommendedLevel": 0,
+  "width": 4,
+  "height": 3,
+  "terrain": [
+    [0, 0, 0, 1],
+    [1, 0, 0, 1],
+    [0, 0, 0, 1]],
+    "entities": [
+    {
+      "type": "entrance",
+      "x": 1,
+      "y": 2
+    },
+    {
+      "type": "exit",
+      "x": 2,
+      "y": 0
+    },
+    {
+      "type": "message",
+      "message": "Howdy!",
+      "x": 1,
+      "y": 2
+    },
+    {
+      "id": 1,
+      "type": "monster",
+      "name": "Steffan",
+      "entranceText": "Hei, knöpp de möp.",
+      "exitText": "Tschau du sau!",
+      "class": 0,
+      "att": 4,
+      "def": 5,
+      "agi": 6,
+      "x": 1,
+      "y": 1,
+      "hidden": false
+    },
+    {
+      "type": "healHP",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "type": "fork",
+      "question": "Fight or run?",
+      "answer1": "Fight",
+      "jumpTo1": 1,
+      "answer2": "Flieht ihr Narren!",
+      "jumpTo2": 2
+    },
+    {
+      "id": 2,
+      "type": "movePlayer",
+      "direction": "down"
+    },
+    {
+      "type": "movePlayer",
+      "direction": "left",
+      "x": 2,
+      "y": 2
+    }
+  ]
+}

@@ -1,5 +1,4 @@
 <?php
-require_once "class.sqlite.php";
 
 abstract class Klass {
   const Developer = 0;
@@ -50,6 +49,7 @@ class User {
         $this->agi += 1;
         break;
     }
+    $this->save();
   }
 
   public static function create($username, $email, $password, $class) {
@@ -69,6 +69,9 @@ class User {
     apply_arr($user_array, $user);
     return $user;
   }
+  public function save() {
+    $GLOBALS["db"]->update("users", $this, array("name" => $this->name));
+  }
 
   public static function login($username, $password) {
     $user = User::load($username);
@@ -76,5 +79,10 @@ class User {
       return false;
     $_SESSION["user"] = $user;
     return $user;
+  }
+
+  public static function refresh() {
+    if (array_key_exists("user", $_SESSION))
+      $_SESSION["user"] = User::load($_SESSION["user"]->name);
   }
 }

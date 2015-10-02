@@ -47,7 +47,7 @@ TLOR.newTerrain = function() {
 };
 
 TLOR.getTerrainFor = function(x, y) {
-  return TLOR.el.find(sprintf('td[data-x="%i"][data-y="%i"]', x, y)).attr('data-terr');
+  return parseInt(TLOR.el.find(sprintf('td[data-x="%i"][data-y="%i"]', x, y)).attr('data-terr'));
 };
 
 TLOR.generateTerrainJSON = function() {
