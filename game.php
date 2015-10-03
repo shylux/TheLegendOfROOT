@@ -17,6 +17,7 @@ if (require_params("id")):
 
 <script type="text/javascript">
 TLOR.setup($('#game-container'), <?=json_encode($game)?>, {});
+TLOR.play();
 </script>
 
 

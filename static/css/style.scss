@@ -1,4 +1,5 @@
 $sitewidth: 800px;
+$spritedir: '/static/img/sprites';
 
 html, body {
   margin: 0;
@@ -42,15 +43,30 @@ footer #authors {
   table {
     width: 100%;
     td {
-      border: 1px solid black;
+      padding: 0;
+      background-size: 100% 100%;
+      image-rendering: pixelated;
+
       &[data-terr="0"] {
         background-color: #060;
+        background-image: url(#{$spritedir}/grass.png);
       }
       &[data-terr="1"] {
         background-color: #666;
       }
       &[data-terr="2"] {
         background-color: #33ADFF;
+      }
+
+      &.entrance {
+        background-color: black;
+      }
+      &.exit {
+        background-image: none;
+        background-color: red;
+      }
+      &.player {
+        background-image: url(#{$spritedir}/hero.png);
       }
     }
   }

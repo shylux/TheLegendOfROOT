@@ -29,13 +29,23 @@ footer #authors {
 .game-tile table {
   width: 100%; }
   .game-tile table td {
-    border: 1px solid black; }
+    padding: 0;
+    background-size: 100% 100%;
+    image-rendering: pixelated; }
     .game-tile table td[data-terr="0"] {
-      background-color: #060; }
+      background-color: #060;
+      background-image: url(/static/img/sprites/grass.png); }
     .game-tile table td[data-terr="1"] {
       background-color: #666; }
     .game-tile table td[data-terr="2"] {
       background-color: #33ADFF; }
+    .game-tile table td.entrance {
+      background-color: black; }
+    .game-tile table td.exit {
+      background-image: none;
+      background-color: red; }
+    .game-tile table td.player {
+      background-image: url(/static/img/sprites/hero.png); }
 
 #terrain-select.game-tile table {
   width: inherit;

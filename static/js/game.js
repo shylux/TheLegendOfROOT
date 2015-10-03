@@ -9,8 +9,8 @@ TLOR.setup = function(jq_element, initial_dungeon_data) {
   TLOR.el = jq_element;
   TLOR = $.extend(TLOR, initial_dungeon_data);
 
-  TLOR.el.append('<table><tbody></tbody></table>');
-  if ('terrain' in TLOR)
+  TLOR.el.append('<table cellspacing="0"><tbody></tbody></table>');
+  if ('terrain' in TLOR) // create new terrain?
     TLOR.buildTerrain(TLOR.terrain);
   else
     TLOR.newTerrain();
@@ -46,8 +46,11 @@ TLOR.newTerrain = function() {
   }
 };
 
+TLOR.getCell = function(x, y) {
+  return TLOR.el.find(sprintf('td[data-x="%i"][data-y="%i"]', x, y));
+};
 TLOR.getTerrainFor = function(x, y) {
-  return parseInt(TLOR.el.find(sprintf('td[data-x="%i"][data-y="%i"]', x, y)).attr('data-terr'));
+  return parseInt(TLOR.getCell(x, y).attr('data-terr'));
 };
 
 TLOR.generateTerrainJSON = function() {
@@ -61,3 +64,37 @@ TLOR.generateTerrainJSON = function() {
   }
   return JSON.stringify(terr);
 };
+
+var controls = `
+  <div id="game-controls">
+    <button>Up</button>
+    <button>Down</button>
+    <button>Left</button>
+    <button>Right</button>
+  </div>
+`;
+TLOR.play = function() {
+  // setup entities
+  for (var i in TLOR.entities) {
+    var entity = TLOR.entities[i];
+    switch (entity.type) {
+      case "entrance":
+      case "exit":
+        TLOR.getCell(entity.x, entity.y).addClass(entity.type);
+        break;
+    }
+  }
+  // place player
+  TLOR.getCell(TLOR.stats.x, TLOR.stats.y).addClass('player');
+
+  // add controls
+  TLOR.el.append(controls);
+  $(TLOR.el).find('#game-controls button').on('click', function() {
+    $.get('api.php', {id:TLOR.id, action: $(this).text()}, TLOR.handleAction);
+  });
+};
+
+// executes commands given by server
+TLOR.handleAction = function(command) {
+  debugger;
+}

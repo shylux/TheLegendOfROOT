@@ -7,13 +7,13 @@
   "entities": [
     {
       "type": "entrance",
-      "x": 1,
-      "y": 2
+      "x": 18,
+      "y": 22
     },
     {
       "type": "exit",
-      "x": 2,
-      "y": 0
+      "x": 24,
+      "y": 2
     },
     {
       "type": "message",

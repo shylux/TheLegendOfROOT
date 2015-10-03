@@ -25,6 +25,10 @@
     <input type="submit" value="Export terrain data" onclick="javascript:exportTerrain();" />
   </div>
   <div id="game-container" class="game-tile"></div>
+  <div id="position">
+    <span>X: <code id="pos-x"></code></span>
+    <span>Y: <code id="pos-y"></code></span>
+  </div>
   <div id="terrain-select" class="game-tile">
     <div><b>Available Terrains</b></div>
     <table>
@@ -61,6 +65,8 @@ $(function() {
     $(this).addClass('selected');
   });
   $('#game-container').on('mousedown mousemove', 'td', function(e) {
+    $('#pos-x').text($(this).attr('data-x'));
+    $('#pos-y').text($(this).attr('data-y'));
     if (e.buttons == 1) // left mouse button down
       $(this).attr('data-terr', $('#terrain-select td.selected').attr('data-terr'));
   });
