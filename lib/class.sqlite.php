@@ -86,7 +86,8 @@ class SQLITE extends SQLite3 {
     $data = $this->filterColumns($table, $data);
     $fields = array_keys($data);
     $sql = "INSERT INTO '{$table}' ('" . implode("','", $fields) . "') VALUES (" . implode(",", $this->buildInsertCondition($data)) . ")";
-    return parent::query($sql);
+    parent::query($sql);
+    return parent::lastInsertRowid();
   }
   public function remove( $table, $where )
   {

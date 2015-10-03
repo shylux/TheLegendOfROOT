@@ -1,6 +1,7 @@
 <?php
 
 class Game implements JsonSerializable {
+  public $id;
   public $username;
   public $stats = array(); // contains current health, position etc
 
@@ -21,7 +22,9 @@ class Game implements JsonSerializable {
     $game->stats["y"] = $entrance->y;
 
     $game->json_data = json_encode($game);
-    $GLOBALS["db"]->insert("games", $game);
+    $id = $GLOBALS["db"]->insert("games", $game);
+    $game->id = $id;
+    $game->save();
   }
 
   public static function loadGame($id) {
@@ -34,10 +37,14 @@ class Game implements JsonSerializable {
   public static function deleteGame($id) {
     $GLOBALS["db"]->remove("games", array("id" => $id));
   }
-
   public static function listGames($username = false) {
     if (!$username) $username = $_SESSION["user"]->name;
     return $GLOBALS["db"]->select("games", array("id", "name", "recommendedLevel"), array("username" => $username));
+  }
+
+  public function save() {
+    $this->json_data = json_encode($this);
+    $GLOBALS["db"]->update("games", $this, array("id" => $this->id));
   }
 
   // Prevent recursive serialization of json_data
