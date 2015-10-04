@@ -1,7 +1,19 @@
 <?php
 require_once "lib/load.php";
 
-var_dump($_REQUEST);
 if (!require_params("id", "action")) die();
+$action = strtolower($_REQUEST["action"]);
+$game = Game::loadGame($_REQUEST["id"]);
 
-echo "test";
+switch ($action) {
+  case 'up':
+  case 'down':
+  case 'left':
+  case 'right':
+    echo json_encode($game->move($action));
+    break;
+
+  default:
+    throw new Exception("Unknown action.");
+    break;
+}

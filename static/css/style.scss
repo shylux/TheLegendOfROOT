@@ -45,17 +45,19 @@ footer #authors {
     td {
       padding: 0;
       background-size: 100% 100%;
-      image-rendering: pixelated;
+      // image-rendering: pixelated;
 
       &[data-terr="0"] {
         background-color: #060;
         background-image: url(#{$spritedir}/grass.png);
       }
       &[data-terr="1"] {
+        background-image: url(#{$spritedir}/rock.png);
         background-color: #666;
       }
       &[data-terr="2"] {
         background-color: #33ADFF;
+        background-image: url(#{$spritedir}/water.png);
       }
 
       &.entrance {

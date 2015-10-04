@@ -90,11 +90,37 @@ TLOR.play = function() {
   // add controls
   TLOR.el.append(controls);
   $(TLOR.el).find('#game-controls button').on('click', function() {
-    $.get('api.php', {id:TLOR.id, action: $(this).text()}, TLOR.handleAction);
+    $.getJSON('api.php', {id:TLOR.id, action: $(this).text()}, TLOR.handleAction);
+  });
+  $(document).on('keydown keypress', function(e) {
+    var action;
+    switch (e.keyCode) {
+      case 37:
+        action = 'left';
+        break;
+      case 38:
+        action = 'up';
+        break;
+      case 39:
+        action = 'right';
+        break;
+      case 40:
+        action = 'down';
+        break;
+      default:
+        return;
+    }
+    e.preventDefault();
+    $.getJSON('api.php', {id:TLOR.id, action: action}, TLOR.handleAction);
   });
 };
 
 // executes commands given by server
 TLOR.handleAction = function(command) {
-  debugger;
+  console.log(command);
+  switch (command.action) {
+    case "movePlayer":
+      TLOR.el.find('.player').removeClass('player');
+      TLOR.getCell(command.x, command.y).addClass('player');
+  }
 }

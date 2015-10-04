@@ -1,14 +1,56 @@
 <?php
 
 class Game implements JsonSerializable {
+  const PASSABLE_TERRAIN_IDS = [0];
+
   public $id;
   public $username;
   public $stats = array(); // contains current health, position etc
 
+  public function move($direction) {
+    $newPos = $this->getNewCoords($direction);
+    $this->checkCoords($newPos);
+    $this->stats->x = $newPos["x"];
+    $this->stats->y = $newPos["y"];
+    $this->save();
+    return array(
+      "action" => "movePlayer",
+      "x" => $newPos["x"],
+      "y" => $newPos["y"]);
+  }
+
+  public function exitDungeon() {
+    
+  }
+
+  public function getNewCoords($direction) {
+    switch ($direction) {
+      case 'up':
+        return array("x"=>$this->stats->x, "y"=>$this->stats->y-1);
+      case 'down':
+        return array("x"=>$this->stats->x, "y"=>$this->stats->y+1);
+      case 'right':
+        return array("x"=>$this->stats->x+1, "y"=>$this->stats->y);
+      case 'left':
+        return array("x"=>$this->stats->x-1, "y"=>$this->stats->y);
+      default:
+        throw new Exception("Unknown move direction.");
+    }
+  }
+  public function checkCoords($newPos) {
+    if ($newPos["x"] >= $this->width || $newPos["x"] < 0 ||
+        $newPos["y"] >= $this->height || $newPos["y"] < 0)
+      throw new Exception("Cannot move outside of dungeon!");
+    if (!$this->isPassable($newPos["x"], $newPos["y"]))
+      throw new Exception("Terrain unpassable!");
+  }
   public function getEntityByType($type) {
     foreach ($this->entities as $entity) {
       if ($entity->type == $type) return $entity;
     }
+  }
+  public function isPassable($x, $y) {
+    return in_array($this->terrain[$y][$x], Game::PASSABLE_TERRAIN_IDS);
   }
 
   public static function newGame($dungeon_name) {

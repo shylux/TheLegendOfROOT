@@ -30,15 +30,16 @@ footer #authors {
   width: 100%; }
   .game-tile table td {
     padding: 0;
-    background-size: 100% 100%;
-    image-rendering: pixelated; }
+    background-size: 100% 100%; }
     .game-tile table td[data-terr="0"] {
       background-color: #060;
       background-image: url(/static/img/sprites/grass.png); }
     .game-tile table td[data-terr="1"] {
+      background-image: url(/static/img/sprites/rock.png);
       background-color: #666; }
     .game-tile table td[data-terr="2"] {
-      background-color: #33ADFF; }
+      background-color: #33ADFF;
+      background-image: url(/static/img/sprites/water.png); }
     .game-tile table td.entrance {
       background-color: black; }
     .game-tile table td.exit {
