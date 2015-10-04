@@ -18,15 +18,16 @@ TLOR.setup = function(jq_element, initial_dungeon_data) {
   // resize
   var table = TLOR.el.find('table');
   table.height(table.width()/TLOR.width*TLOR.height);
+  //table.find('tr').height(table.height()/TLOR.height);
 };
 TLOR.buildTerrain = function(terrain_data) {
   var tbody = TLOR.el.find('tbody');
   for (y = 0; y < TLOR.height; y++) {
     var row = $('<tr>');
     for (x = 0; x < TLOR.width; x++) {
-      var cell = $('<td>');
+      var cell = $('<td><img></td>');
       cell.attr('data-y', y).attr('data-x', x);
-      cell.attr('data-terr', terrain_data[y][x]);
+      cell.find('img').attr('data-terr', terrain_data[y][x]);
       row.append(cell);
     }
     tbody.append(row);
@@ -37,9 +38,9 @@ TLOR.newTerrain = function() {
   for (y = 0; y < TLOR.height; y++) {
     var row = $('<tr>');
     for (x = 0; x < TLOR.width; x++) {
-      var cell = $('<td>');
+      var cell = $('<td><img></td>');
       cell.attr('data-y', y).attr('data-x', x);
-      cell.attr('data-terr', 0);
+      cell.find('img').attr('data-terr', 0);
       row.append(cell);
     }
     tbody.append(row);
@@ -50,7 +51,12 @@ TLOR.getCell = function(x, y) {
   return TLOR.el.find(sprintf('td[data-x="%i"][data-y="%i"]', x, y));
 };
 TLOR.getTerrainFor = function(x, y) {
-  return parseInt(TLOR.getCell(x, y).attr('data-terr'));
+  return parseInt(TLOR.getCell(x, y).find('img').attr('data-terr'));
+};
+TLOR.newTile = function (x, y) {
+  var tile = $('<img>');
+  TLOR.getCell(x, y).append(tile);
+  return tile;
 };
 
 TLOR.generateTerrainJSON = function() {
@@ -80,12 +86,12 @@ TLOR.play = function() {
     switch (entity.type) {
       case "entrance":
       case "exit":
-        TLOR.getCell(entity.x, entity.y).addClass(entity.type);
+        TLOR.newTile(entity.x, entity.y).addClass(entity.type);
         break;
     }
   }
   // place player
-  TLOR.getCell(TLOR.stats.x, TLOR.stats.y).addClass('player');
+  TLOR.newTile(TLOR.stats.x, TLOR.stats.y).addClass('player');
 
   // add controls
   TLOR.el.append(controls);
@@ -121,7 +127,7 @@ TLOR.handleAction = function(command) {
   console.log(command);
   switch (command.action) {
     case "movePlayer":
-      TLOR.el.find('.player').removeClass('player');
-      TLOR.getCell(command.x, command.y).addClass('player');
+      TLOR.el.find('.player').remove();
+      TLOR.newTile(command.x, command.y).addClass('player');
   }
 }

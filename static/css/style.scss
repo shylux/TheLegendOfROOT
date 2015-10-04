@@ -1,5 +1,7 @@
 $sitewidth: 800px;
-$spritedir: '/static/img/sprites';
+@mixin sprite($name) {
+  content: url(/static/img/sprites/#{$name}.png);
+}
 
 html, body {
   margin: 0;
@@ -42,49 +44,70 @@ footer #authors {
 .game-tile {
   table {
     width: 100%;
+    table-layout: fixed;
+
+    tr {
+      overflow:visible;
+    }
     td {
+      position: relative;
       padding: 0;
-      background-size: 100% 100%;
       // image-rendering: pixelated;
 
-      &[data-terr="0"] {
-        background-color: #060;
-        background-image: url(#{$spritedir}/grass.png);
-      }
-      &[data-terr="1"] {
-        background-image: url(#{$spritedir}/rock.png);
-        background-color: #666;
-      }
-      &[data-terr="2"] {
-        background-color: #33ADFF;
-        background-image: url(#{$spritedir}/water.png);
-      }
-      &[data-terr="3"] {
-        background-image: url(#{$spritedir}/bridge.png);
-        background-color: #472400;
-      }
-      &[data-terr="4"] {
-        background-image: url(#{$spritedir}/tallgrass.png);
-        background-color: #360;
-      }
-      &[data-terr="5"] {
-        background-image: url(#{$spritedir}/road.png);
-        background-color: #C90;
-      }
-      &[data-terr="6"] {
-        background-image: url(#{$spritedir}/sand.png);
-        background-color: #d6b55f;
-      }
+      img {
+        position: absolute;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        width: 100%;
 
-      &.entrance {
-        background-color: black;
+        &[data-terr="0"] {
+          background-color: #060;
+          @include sprite(grass);
+        }
+        &[data-terr="1"] {
+          background-color: #666;
+          @include sprite(rock);
+        }
+        &[data-terr="2"] {
+          background-color: #33ADFF;
+          @include sprite(water);
+        }
+        &[data-terr="3"] {
+          background-color: #472400;
+          @include sprite(bridge);
+        }
+        &[data-terr="4"] {
+          background-color: #360;
+          @include sprite(tallgrass);
+        }
+        &[data-terr="5"] {
+          background-color: #C90;
+          @include sprite(road);
+        }
+        &[data-terr="6"] {
+          background-color: #d6b55f;
+          @include sprite(sand);
+        }
+
+
+        &.player {
+          @include sprite(player);
+        }
+
+        &.entrance {
+          background-color: black;
+        }
+        &.exit {
+          background-color: red;
+        }
+
       }
-      &.exit {
-        background-image: none;
-        background-color: red;
-      }
-      &.player {
-        background-image: url(#{$spritedir}/hero.png);
+    }
+    td {
+      background-color: #446d1c;
+      img[data-terr="7"] {
+        @include sprite(tree);
       }
     }
   }

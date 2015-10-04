@@ -30,11 +30,11 @@
     <span>Y: <code id="pos-y"></code></span>
   </div>
   <div id="terrain-select" class="game-tile">
-    <div><b>Available Terrains</b></div>
+    <div><b>Available Terrains</b> Hold <code>ctrl</code> and click to fill rects.</div>
     <table>
       <tr>
-        <?php for ($i = 0; $i <= 6; $i++) { ?>
-        <td data-terr="<?= $i ?>"></td>
+        <?php for ($i = 0; $i <= 7; $i++) { ?>
+        <td><img data-terr="<?= $i ?>"></td>
         <?php } ?>
       </tr>
     </table>
@@ -68,7 +68,22 @@ $(function() {
     $('#pos-x').text($(this).attr('data-x'));
     $('#pos-y').text($(this).attr('data-y'));
     if (e.buttons == 1) // left mouse button down
-      $(this).attr('data-terr', $('#terrain-select td.selected').attr('data-terr'));
+      $(this).find('img').attr('data-terr', $('#terrain-select td.selected img').attr('data-terr'));
+  });
+  var lastClickPos;
+  $('#game-container').on('click', 'td', function(e) {
+    if (e.ctrlKey) {
+      if (typeof lastClickPos === 'undefined') {
+        lastClickPos = {x: parseInt($(this).attr('data-x')), y: parseInt($(this).attr('data-y'))};
+      } else {
+        newX = parseInt($(this).attr('data-x'));
+        newY = parseInt($(this).attr('data-y'));
+        for (x = Math.min(newX, lastClickPos.x); x <= Math.max(newX, lastClickPos.x); x++)
+          for (y = Math.min(newY, lastClickPos.y); y <= Math.max(newY, lastClickPos.y); y++)
+            TLOR.getCell(x, y).find('img').attr('data-terr', $('#terrain-select td.selected img').attr('data-terr'));
+        lastClickPos = undefined;
+      }
+    }
   });
 });
 </script>
