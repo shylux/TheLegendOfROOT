@@ -33,7 +33,7 @@
     <div><b>Available Terrains</b></div>
     <table>
       <tr>
-        <?php for ($i = 0; $i <= 2; $i++) { ?>
+        <?php for ($i = 0; $i <= 6; $i++) { ?>
         <td data-terr="<?= $i ?>"></td>
         <?php } ?>
       </tr>

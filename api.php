@@ -2,7 +2,7 @@
 require_once "lib/load.php";
 
 if (!require_params("id", "action")) die();
-$action = strtolower($_REQUEST["action"]);
+$action = $_REQUEST["action"];
 $game = Game::loadGame($_REQUEST["id"]);
 
 switch ($action) {

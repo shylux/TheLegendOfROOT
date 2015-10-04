@@ -59,6 +59,22 @@ footer #authors {
         background-color: #33ADFF;
         background-image: url(#{$spritedir}/water.png);
       }
+      &[data-terr="3"] {
+        background-image: url(#{$spritedir}/bridge.png);
+        background-color: #472400;
+      }
+      &[data-terr="4"] {
+        background-image: url(#{$spritedir}/tallgrass.png);
+        background-color: #360;
+      }
+      &[data-terr="5"] {
+        background-image: url(#{$spritedir}/road.png);
+        background-color: #C90;
+      }
+      &[data-terr="6"] {
+        background-image: url(#{$spritedir}/sand.png);
+        background-color: #d6b55f;
+      }
 
       &.entrance {
         background-color: black;

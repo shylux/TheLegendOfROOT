@@ -1,7 +1,7 @@
 <?php
 
 class Game implements JsonSerializable {
-  const PASSABLE_TERRAIN_IDS = [0];
+  const PASSABLE_TERRAIN_IDS = [0, 3, 4, 5, 6];
 
   public $id;
   public $username;
@@ -20,7 +20,7 @@ class Game implements JsonSerializable {
   }
 
   public function exitDungeon() {
-    
+
   }
 
   public function getNewCoords($direction) {

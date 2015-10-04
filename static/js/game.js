@@ -90,7 +90,8 @@ TLOR.play = function() {
   // add controls
   TLOR.el.append(controls);
   $(TLOR.el).find('#game-controls button').on('click', function() {
-    $.getJSON('api.php', {id:TLOR.id, action: $(this).text()}, TLOR.handleAction);
+    var action = $(this).text().toLowerCase();
+    $.getJSON('api.php', {id:TLOR.id, action: action}, TLOR.handleAction);
   });
   $(document).on('keydown keypress', function(e) {
     var action;

@@ -40,6 +40,18 @@ footer #authors {
     .game-tile table td[data-terr="2"] {
       background-color: #33ADFF;
       background-image: url(/static/img/sprites/water.png); }
+    .game-tile table td[data-terr="3"] {
+      background-image: url(/static/img/sprites/bridge.png);
+      background-color: #472400; }
+    .game-tile table td[data-terr="4"] {
+      background-image: url(/static/img/sprites/tallgrass.png);
+      background-color: #360; }
+    .game-tile table td[data-terr="5"] {
+      background-image: url(/static/img/sprites/road.png);
+      background-color: #C90; }
+    .game-tile table td[data-terr="6"] {
+      background-image: url(/static/img/sprites/sand.png);
+      background-color: #d6b55f; }
     .game-tile table td.entrance {
       background-color: black; }
     .game-tile table td.exit {
