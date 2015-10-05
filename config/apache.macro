@@ -1,4 +1,5 @@
 <Macro TheLegendOfROOT $path>
+AccessFileName .htaccess
 <VirtualHost *:80>
     ServerAdmin shylux@gmail.com
 
@@ -11,5 +12,10 @@
 
     ErrorLog "$path/logs/apache_error.log"
     CustomLog "$path/logs/apache_access.log" common
+
+    Options +FollowSymLinks
+    RewriteEngine On
+    ErrorDocument 404 /index.php
+
 </VirtualHost>
 </Macro>

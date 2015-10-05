@@ -1,8 +1,8 @@
 <?php require_once("lib/load.php"); ?>
-  
+
 <!DOCTYPE html>
 <html>
-<head> 
+<head>
   <title>The Legend of ROOT</title>
   <meta charset="utf-8">
   <meta name="author" content="Stefan Tanner &amp; Lukas Knöpfel">
