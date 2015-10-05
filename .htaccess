@@ -1,0 +1,9 @@
+Options +FollowSymLinks
+ErrorDocument 404 /index.php
+
+RewriteRule    ^user/([0-9]+)/?$	index.php?include=user.php&id=$1    [NC,L]
+RewriteRule    ^store/([0-9]+)/?$	index.php?include=store.php&id=$1   [NC,L]
+RewriteRule    ^register$		index.php?include=register.php
+RewriteRule    ^game$			index.php?include=game.php 
+RewriteRule    ^character$		index.php?include=character.php 
+RewriteRule    ^logout$			index.php?include=logout.php 
