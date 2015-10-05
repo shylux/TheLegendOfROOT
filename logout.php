@@ -1,5 +1,5 @@
 <?php
-require_once "lib/requires.php";
+require_once "lib/load.php";
 
 unset($_SESSION["user"]);
 session_destroy($_SESSION["user"]);
