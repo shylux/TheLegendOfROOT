@@ -1,5 +1,4 @@
 <?php
-require "header.php";
 
 if (require_params("new")) {
   Game::newGame($_REQUEST["new"]);
@@ -43,5 +42,3 @@ TLOR.play();
 </div>
 
 <?php endif; ?>
-
-<?php require "footer.php" ?>

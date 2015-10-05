@@ -1,5 +1,4 @@
 <?php
-require "header.php";
 
 if (require_params("username", "email", "password", "class")) {
   $user = User::create($_REQUEST["username"], $_REQUEST["email"], $_REQUEST["password"], $_REQUEST["class"]);
@@ -27,5 +26,3 @@ if (require_params("username", "email", "password", "class")) {
   <input id="password" name="password" type="password" placeholder="Password" />
   <input type="submit" value="Register" />
 </form>
-
-<?php require "footer.php" ?>

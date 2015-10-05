@@ -1,5 +1,3 @@
-<?php require "header.php" ?>
-
 <h2>Dungeon Editor</h2>
 
 <div id="editor">
@@ -87,4 +85,3 @@ $(function() {
   });
 });
 </script>
-<?php require "footer.php" ?>

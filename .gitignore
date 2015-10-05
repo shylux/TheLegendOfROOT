@@ -1,4 +1,5 @@
 *.db
 logs/*
 !logs/.gitkeep
+*.sqlite
 .sass-cache
