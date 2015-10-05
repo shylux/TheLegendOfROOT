@@ -72,7 +72,7 @@ $(function() {
   });
   var lastClickPos;
   $('#game-container').on('click', 'td', function(e) {
-    if (e.ctrlKey) {
+    if (e.shiftKey) {
       if (typeof lastClickPos === 'undefined') {
         lastClickPos = {x: parseInt($(this).attr('data-x')), y: parseInt($(this).attr('data-y'))};
       } else {
