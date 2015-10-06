@@ -6,11 +6,15 @@
 
 `httpd.conf`
 ```
-LoadModule macro_module modules/mod_macro.so
 Include <git root>/config/apache.macro
 Use TheLegendOfROOT "<git root>"
 UndefMacro TheLegendOfROOT
 ```
+
+Required apache modules:
+  * rewrite
+  * macro
+
 ### Configuration
 
 The class class.configuration.php stores the configuration object. It loads it's data from a config file - this file must exist and must be writable. To use the configuration object just do
