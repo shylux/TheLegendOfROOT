@@ -12,6 +12,11 @@ class Game implements JsonSerializable {
     $this->checkCoords($newPos);
     $this->stats->x = $newPos["x"];
     $this->stats->y = $newPos["y"];
+
+    foreach ($this->getEntities($this->stats->x, $this->stats->y) as $entity) {
+      $this->executeEntity($entity);
+    }
+
     $this->save();
     return array(
       "action" => "movePlayer",
@@ -19,6 +24,7 @@ class Game implements JsonSerializable {
       "y" => $newPos["y"]);
   }
 
+  public function executeEntity($entity) {}
   public function exitDungeon() {
 
   }
@@ -43,6 +49,14 @@ class Game implements JsonSerializable {
       throw new Exception("Cannot move outside of dungeon!");
     if (!$this->isPassable($newPos["x"], $newPos["y"]))
       throw new Exception("Terrain unpassable!");
+  }
+  public function getEntities($x, $y) {
+    $entities = array();
+    foreach ($this->entities as $entity) {
+      if (!all_set($entity, "x", "y")) continue;
+      $entities[] = $entity;
+    }
+    return $entities;
   }
   public function getEntityByType($type) {
     foreach ($this->entities as $entity) {

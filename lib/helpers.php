@@ -1,6 +1,12 @@
 <?php
 
 // Checks if every paramter is sent and non-empty
+function all_set($obj, ...$list_of_params) {
+  foreach ($list_of_params as $param)
+    if (!isset($obj, $param)) return false;
+  return true;
+}
+// checks if all are present in $_REQUEST
 function require_params(...$list_of_params) {
   foreach ($list_of_params as $param)
     if (!array_key_exists($param, $_REQUEST) || strlen($_REQUEST[$param]) == 0) return false;
