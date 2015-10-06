@@ -3,3 +3,5 @@ logs/*
 !logs/.gitkeep
 *.sqlite
 .sass-cache
+*~
+*.mo
