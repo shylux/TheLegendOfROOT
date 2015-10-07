@@ -42,3 +42,11 @@ The *x* and *y* root is at the top left corner. This way we can access the value
 | 4            | tall grass | yes        | entities are hidden |
 | 5            | road       | yes        |                     |
 | 6            | sand       | yes        |                     |
+| 7            | sand2      | yes        |                     |
+| 8            | water2     | no         |                     |
+| 9            | cave       | yes        |                     |
+| 10           | bush       | no         |                     |
+| 11           | tree2      | no         |                     |
+| 12           | grass2     | yes        |                     |
+| 13           | wall       | no         |                     |
+| 14           | item       | yes        |                     |
