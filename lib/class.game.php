@@ -13,18 +13,39 @@ class Game implements JsonSerializable {
     $this->stats->x = $newPos["x"];
     $this->stats->y = $newPos["y"];
 
-    foreach ($this->getEntities($this->stats->x, $this->stats->y) as $entity) {
-      $this->executeEntity($entity);
-    }
+    $action_log = array();
 
-    $this->save();
-    return array(
+    $action_log[] = array(
       "action" => "movePlayer",
       "x" => $newPos["x"],
       "y" => $newPos["y"]);
+
+    foreach ($this->getEntities($this->stats->x, $this->stats->y) as $entity) {
+      $this->executeEntity($entity, $action_log);
+    }
+
+    $this->save();
+    return $action_log;
   }
 
-  public function executeEntity($entity) {}
+  public function executeEntity($entity, &$action_log) {
+    switch ($entity->type) {
+      case "message":
+        $action_log[] = array(
+          "action" => "message",
+          "message" => $entity->message);
+        break;
+      case "movePlayer":
+        $action_log = array_merge($action_log, $this->move($entity->direction));
+        break;
+      default:
+      $action_log[] = array(
+        "action" => "message",
+        "message" => "Type: ".$entity->type
+      );
+    }
+
+  }
   public function exitDungeon() {
 
   }
@@ -54,7 +75,8 @@ class Game implements JsonSerializable {
     $entities = array();
     foreach ($this->entities as $entity) {
       if (!all_set($entity, "x", "y")) continue;
-      $entities[] = $entity;
+      if ($entity->x == $x && $entity->y == $y)
+        $entities[] = $entity;
     }
     return $entities;
   }

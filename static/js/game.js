@@ -83,11 +83,11 @@ TLOR.play = function() {
   // setup entities
   for (var i in TLOR.entities) {
     var entity = TLOR.entities[i];
-    switch (entity.type) {
-      case "entrance":
-      case "exit":
-        TLOR.newTile(entity.x, entity.y).addClass(entity.type);
-        break;
+    if (entity.x && entity.y) {
+      var tile = TLOR.newTile(entity.x, entity.y);
+      tile.addClass(entity.type);
+      if (entity.type == "movePlayer")
+        tile.addClass(entity.direction);
     }
   }
   // place player
@@ -97,7 +97,7 @@ TLOR.play = function() {
   TLOR.el.append(controls);
   $(TLOR.el).find('#game-controls button').on('click', function() {
     var action = $(this).text().toLowerCase();
-    $.getJSON('api.php', {id:TLOR.id, action: action}, TLOR.handleAction);
+    $.getJSON('api.php', {id:TLOR.id, action: action}, TLOR.handleActions);
   });
   $(document).on('keydown keypress', function(e) {
     var action;
@@ -118,16 +118,42 @@ TLOR.play = function() {
         return;
     }
     e.preventDefault();
-    $.getJSON('api.php', {id:TLOR.id, action: action}, TLOR.handleAction);
+
+    if (TLOR.requestInProgress || TLOR.actionQueue.length > 0) return; // avoid walking too far
+    $.getJSON('api.php', {id:TLOR.id, action: action}, TLOR.handleActions);
+  });
+
+  $(document).ajaxStart(function() {
+    TLOR.requestInProgress = true;
+  });
+  $(document).ajaxStop(function() {
+    TLOR.requestInProgress = false;
   });
 };
 
+TLOR.requestInProgress = false;
+
+TLOR.actionQueue = [];
 // executes commands given by server
-TLOR.handleAction = function(command) {
-  console.log(command);
+TLOR.handleActions = function(commands) {
+  console.log(commands);
+  // start executing if queue is not running
+  var startExecuting = (TLOR.actionQueue.length == 0);
+  TLOR.actionQueue = TLOR.actionQueue.concat(commands);
+  if (startExecuting) TLOR.executeActions();
+}
+TLOR.executeActions = function() {
+  command = TLOR.actionQueue.shift();
   switch (command.action) {
     case "movePlayer":
       TLOR.el.find('.player').remove();
       TLOR.newTile(command.x, command.y).addClass('player');
+      break;
+    case "message":
+      alert(command.message);
+      break;
+    default:
+      console.error(sprintf("Unknown action: %s", command.action));
   }
+  if (TLOR.actionQueue.length > 0) setTimeout(TLOR.executeActions, 400);
 }
