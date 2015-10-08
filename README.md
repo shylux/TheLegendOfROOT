@@ -60,20 +60,20 @@ the list to the end.
 ### Terrain
 The **x** and **y** root is at the top left corner. This way we can access the values with `terrain[y][x]`.
 
-| `terrain` id | meaning    | passable   | note                |
-|:-------------|:-----------|:-----------|:--------------------|
-| 0            | grass      | yes        |                     |
-| 1            | rock       | no         |                     |
-| 2            | water      | no (boat?) |                     |
-| 3            | bridge     | yes        |                     |
-| 4            | tall grass | yes        | entities are hidden |
-| 5            | road       | yes        |                     |
-| 6            | sand       | yes        |                     |
-| 7            | sand2      | yes        |                     |
-| 8            | water2     | no         |                     |
-| 9            | cave       | yes        |                     |
-| 10           | bush       | no         |                     |
-| 11           | tree2      | no         |                     |
-| 12           | grass2     | yes        |                     |
-| 13           | wall       | no         |                     |
-| 14           | item       | yes        |                     |
+| `terrain` id | meaning    | passable   | note                | sprite                                       |
+|:-------------|:-----------|:-----------|:--------------------|:---------------------------------------------|
+| 0            | grass      | yes        |                     | <img src="static/img/sprites/grass.png">     |
+| 1            | rock       | no         |                     | <img src="static/img/sprites/rock.png">      |
+| 2            | water      | no (boat?) |                     | <img src="static/img/sprites/water.png">     |
+| 3            | bridge     | yes        |                     | <img src="static/img/sprites/bridge.png">    |
+| 4            | tall grass | yes        | entities are hidden | <img src="static/img/sprites/tallgrass.png"> |
+| 5            | road       | yes        |                     | <img src="static/img/sprites/road.png">      |
+| 6            | sand       | yes        |                     | <img src="static/img/sprites/sand.png">      |
+| 7            | sand2      | yes        |                     | <img src="static/img/sprites/sand2.png">     |
+| 8            | water2     | no         |                     | <img src="static/img/sprites/water2.png">    |
+| 9            | cave       | yes        |                     | <img src="static/img/sprites/cave.png">      |
+| 10           | bush       | no         |                     | <img src="static/img/sprites/bush.png">      |
+| 11           | tree2      | no         |                     | <img src="static/img/sprites/tree2.png">     |
+| 12           | grass2     | yes        |                     | <img src="static/img/sprites/grass2.png">    |
+| 13           | wall       | no         |                     | <img src="static/img/sprites/wall.png">      |
+| 14           | item       | yes        |                     | <img src="static/img/sprites/item.png">      |
