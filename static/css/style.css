@@ -26,71 +26,87 @@ h1 a {
 footer #authors {
   float: right; }
 
-.game-tile table {
-  width: 100%;
-  table-layout: fixed; }
-  .game-tile table tr {
-    overflow: visible; }
-  .game-tile table td {
-    position: relative;
-    padding: 0; }
-    .game-tile table td img {
-      position: absolute;
-      bottom: 0;
-      min-width: 100%;
-      min-height: 100%;
-      width: 100%; }
-      .game-tile table td img[data-terr="0"] {
-        background-color: #060;
-        content: url(/static/img/sprites/grass.png); }
-      .game-tile table td img[data-terr="1"] {
-        background-color: #666;
-        content: url(/static/img/sprites/rock.png); }
-      .game-tile table td img[data-terr="2"] {
-        background-color: #33ADFF;
-        content: url(/static/img/sprites/water.png); }
-      .game-tile table td img[data-terr="3"] {
-        background-color: #472400;
-        content: url(/static/img/sprites/bridge.png); }
-      .game-tile table td img[data-terr="4"] {
-        background-color: #360;
-        content: url(/static/img/sprites/tallgrass.png); }
-      .game-tile table td img[data-terr="5"] {
-        background-color: #C90;
-        content: url(/static/img/sprites/road.png); }
-      .game-tile table td img[data-terr="6"] {
-        background-color: #d6b55f;
-        content: url(/static/img/sprites/sand.png); }
-      .game-tile table td img.player {
-        content: url(/static/img/sprites/player.png); }
-      .game-tile table td img.entrance {
-        background-color: black; }
-      .game-tile table td img.exit {
-        background-color: red; }
-      .game-tile table td img.movePlayer {
-        content: url(/static/img/sprites/move.png); }
-        .game-tile table td img.movePlayer.right {
-          -ms-transform: rotate(180deg);
-          /* IE 9 */
-          -webkit-transform: rotate(180deg);
-          /* Chrome, Safari, Opera */
-          transform: rotate(180deg); }
-        .game-tile table td img.movePlayer.up {
-          -ms-transform: rotate(90deg);
-          /* IE 9 */
-          -webkit-transform: rotate(90deg);
-          /* Chrome, Safari, Opera */
-          transform: rotate(90deg); }
-        .game-tile table td img.movePlayer.down {
-          -ms-transform: rotate(270deg);
-          /* IE 9 */
-          -webkit-transform: rotate(270deg);
-          /* Chrome, Safari, Opera */
-          transform: rotate(270deg); }
-  .game-tile table td {
-    background-color: #446d1c; }
-    .game-tile table td img[data-terr="7"] {
-      content: url(/static/img/sprites/tree.png); }
+.game-tile {
+  position: relative; }
+  .game-tile table {
+    width: 100%;
+    table-layout: fixed; }
+    .game-tile table tr {
+      overflow: visible; }
+    .game-tile table td {
+      position: relative;
+      padding: 0; }
+      .game-tile table td img {
+        position: absolute;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        width: 100%; }
+        .game-tile table td img[data-terr="0"] {
+          background-color: #060;
+          content: url(/static/img/sprites/grass.png); }
+        .game-tile table td img[data-terr="1"] {
+          background-color: #666;
+          content: url(/static/img/sprites/rock.png); }
+        .game-tile table td img[data-terr="2"] {
+          background-color: #33ADFF;
+          content: url(/static/img/sprites/water.png); }
+        .game-tile table td img[data-terr="3"] {
+          background-color: #472400;
+          content: url(/static/img/sprites/bridge.png); }
+        .game-tile table td img[data-terr="4"] {
+          background-color: #360;
+          content: url(/static/img/sprites/tallgrass.png); }
+        .game-tile table td img[data-terr="5"] {
+          background-color: #C90;
+          content: url(/static/img/sprites/road.png); }
+        .game-tile table td img[data-terr="6"] {
+          background-color: #d6b55f;
+          content: url(/static/img/sprites/sand.png); }
+        .game-tile table td img.player {
+          content: url(/static/img/sprites/player.png); }
+        .game-tile table td img.entrance {
+          background-color: black; }
+        .game-tile table td img.exit {
+          background-color: red; }
+        .game-tile table td img.movePlayer {
+          content: url(/static/img/sprites/move.png); }
+          .game-tile table td img.movePlayer.right {
+            -ms-transform: rotate(180deg);
+            /* IE 9 */
+            -webkit-transform: rotate(180deg);
+            /* Chrome, Safari, Opera */
+            transform: rotate(180deg); }
+          .game-tile table td img.movePlayer.up {
+            -ms-transform: rotate(90deg);
+            /* IE 9 */
+            -webkit-transform: rotate(90deg);
+            /* Chrome, Safari, Opera */
+            transform: rotate(90deg); }
+          .game-tile table td img.movePlayer.down {
+            -ms-transform: rotate(270deg);
+            /* IE 9 */
+            -webkit-transform: rotate(270deg);
+            /* Chrome, Safari, Opera */
+            transform: rotate(270deg); }
+    .game-tile table td {
+      background-color: #446d1c; }
+      .game-tile table td img[data-terr="7"] {
+        content: url(/static/img/sprites/tree.png); }
+  .game-tile #dialog {
+    position: absolute;
+    top: 40px;
+    left: 10%;
+    width: 80%;
+    height: 200px;
+    margin: 0 auto;
+    background-color: #efefef;
+    border: 10px solid transparent;
+    -webkit-border-image: url("/static/img/border.png") 8 round;
+    /* Safari 3.1-5 */
+    -o-border-image: url("/static/img/border.png") 8 round;
+    /* Opera 11-12.1 */
+    border-image: url("/static/img/border.png") 8 round; }
 
 #terrain-select.game-tile table {
   width: inherit;

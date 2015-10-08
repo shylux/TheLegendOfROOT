@@ -7,6 +7,11 @@ $sitewidth: 800px;
   -webkit-transform: rotate($amount); /* Chrome, Safari, Opera */
   transform: rotate($amount);
 }
+@mixin border-image($url, $options) {
+  -webkit-border-image: url($url) $options; /* Safari 3.1-5 */
+  -o-border-image: url($url) $options; /* Opera 11-12.1 */
+  border-image: url($url) $options;
+}
 
 html, body {
   margin: 0;
@@ -47,6 +52,8 @@ footer #authors {
 
 // GAME
 .game-tile {
+  position: relative;
+
   table {
     width: 100%;
     table-layout: fixed;
@@ -128,6 +135,18 @@ footer #authors {
         @include sprite(tree);
       }
     }
+  }
+
+  #dialog {
+    position: absolute;
+    top: 40px;
+    left: 10%;
+    width: 80%;
+    height: 200px;
+    margin: 0 auto;
+    background-color: #efefef;
+    border: 10px solid transparent;
+    @include border-image('/static/img/border.png', 8 round);
   }
 }
 

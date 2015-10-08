@@ -1,4 +1,7 @@
 var TLOR = {};
+var TERRAIN = {
+  GRASS: 0, ROCK: 1, WATER: 2, BRIDGE: 3, TALL_GRASS: 4, ROAD: 5, SAND: 6
+};
 /***
  * Parameter:
  * jq_element: The jQuery element in which the dungeon is displayed.
@@ -70,6 +73,11 @@ TLOR.generateTerrainJSON = function() {
   }
   return JSON.stringify(terr);
 };
+TLOR.isHidden = function(entity) {
+  if (["message", "monster"].indexOf(entity.type) > -1) return true;
+  if (TLOR.getTerrainFor(entity.x, entity.y) == TERRAIN.TALL_GRASS) return true;
+  return false;
+};
 
 var controls = `
   <div id="game-controls">
@@ -83,13 +91,16 @@ TLOR.play = function() {
   // setup entities
   for (var i in TLOR.entities) {
     var entity = TLOR.entities[i];
-    if (entity.x && entity.y) {
+    if (entity.x && entity.y && !TLOR.isHidden(entity)) {
       var tile = TLOR.newTile(entity.x, entity.y);
       tile.addClass(entity.type);
       if (entity.type == "movePlayer")
         tile.addClass(entity.direction);
     }
   }
+  // setup dialog
+  TLOR.dialog = $('<div id="dialog"></div>');
+  TLOR.el.append(TLOR.dialog);
   // place player
   TLOR.newTile(TLOR.stats.x, TLOR.stats.y).addClass('player');
 
