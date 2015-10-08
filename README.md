@@ -69,7 +69,7 @@ The **x** and **y** root is at the top left corner. This way we can access the v
 | 4            | tall grass | yes        | entities are hidden | <img src="static/img/sprites/tallgrass.png"> |
 | 5            | road       | yes        |                     | <img src="static/img/sprites/road.png">      |
 | 6            | sand       | yes        |                     | <img src="static/img/sprites/sand.png">      |
-| 7            | sand2      | yes        |                     | <img src="static/img/sprites/sand2.png">     |
+| 7            | tree       | no         |                     | <img src="static/img/sprites/tree.png">      |
 | 8            | water2     | no         |                     | <img src="static/img/sprites/water2.png">    |
 | 9            | cave       | yes        |                     | <img src="static/img/sprites/cave.png">      |
 | 10           | bush       | no         |                     | <img src="static/img/sprites/bush.png">      |
@@ -77,3 +77,4 @@ The **x** and **y** root is at the top left corner. This way we can access the v
 | 12           | grass2     | yes        |                     | <img src="static/img/sprites/grass2.png">    |
 | 13           | wall       | no         |                     | <img src="static/img/sprites/wall.png">      |
 | 14           | item       | yes        |                     | <img src="static/img/sprites/item.png">      |
+| 15           | sand2      | yes        |                     | <img src="static/img/sprites/sand2.png">     |
