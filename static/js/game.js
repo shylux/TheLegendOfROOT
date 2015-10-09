@@ -21,7 +21,6 @@ TLOR.setup = function(jq_element, initial_dungeon_data) {
   // resize
   var table = TLOR.el.find('table');
   table.height(table.width()/TLOR.width*TLOR.height);
-  //table.find('tr').height(table.height()/TLOR.height);
 };
 TLOR.buildTerrain = function(terrain_data) {
   var tbody = TLOR.el.find('tbody');
@@ -170,6 +169,9 @@ TLOR.executeActions = function() {
       break;
     case "message":
       TLOR.showMessage(command.message);
+      return;
+    case "refreshBrowser":
+      location.reload();
       return;
     default:
       console.error(sprintf("Unknown action: %s", command.action));

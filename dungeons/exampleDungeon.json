@@ -12,6 +12,8 @@
     },
     {
       "type": "exit",
+      "toDungeon": "bay",
+      "number": 1,
       "x": 24,
       "y": 2
     },

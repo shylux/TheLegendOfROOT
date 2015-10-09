@@ -11,6 +11,12 @@
       "y": 34
     },
     {
+      "type": "entrance",
+      "number": 1,
+      "x": 24,
+      "y": 27
+    },
+    {
       "type": "exit",
       "x": 21,
       "y": 0

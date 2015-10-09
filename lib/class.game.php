@@ -24,7 +24,8 @@ class Game implements JsonSerializable {
       $this->executeEntity($entity, $action_log);
     }
 
-    $this->save();
+    if (end($action_log)["action"] !== "exit")
+      $this->save();
     return $action_log;
   }
 
@@ -38,6 +39,10 @@ class Game implements JsonSerializable {
       case "movePlayer":
         $action_log = array_merge($action_log, $this->move($entity->direction));
         break;
+      case "exit":
+        $this->exitDungeon($entity);
+        $action_log[] = array("action" => "refreshBrowser");
+        break;
       default:
       $action_log[] = array(
         "action" => "message",
@@ -46,8 +51,9 @@ class Game implements JsonSerializable {
     }
 
   }
-  public function exitDungeon() {
-
+  public function exitDungeon($entity) {
+    $this->delete();
+    Game::newGame($entity->toDungeon, $entity->number);
   }
 
   public function getNewCoords($direction) {
@@ -80,22 +86,30 @@ class Game implements JsonSerializable {
     }
     return $entities;
   }
-  public function getEntityByType($type) {
+  public function getEntrance($entrance_nr) {
+    $default_entrance = null;
+    $entrance = null;
     foreach ($this->entities as $entity) {
-      if ($entity->type == $type) return $entity;
+      if ($entity->type == "entrance") {
+        if ($default_entrance === null) $default_entrance = $entity;
+        if ($entrance_nr !== null && isset($entity->number) && $entrance_nr == $entity->number)
+          $entrance = $entity;
+      }
     }
+    if ($entrance !== null) return $entrance;
+    return $default_entrance;
   }
   public function isPassable($x, $y) {
     return in_array($this->terrain[$y][$x], Game::PASSABLE_TERRAIN_IDS);
   }
 
-  public static function newGame($dungeon_name) {
-    $filename = check_filename("./dungeons/", $dungeon_name);
+  public static function newGame($dungeon_name, $entrance_nr = null) {
+    $filename = check_filename("./dungeons/", $dungeon_name.".json");
     $game = new Game();
     apply_arr(json_decode(file_get_contents($filename)), $game);
 
     $game->username = $_SESSION["user"]->name;
-    $entrance = $game->getEntityByType("entrance");
+    $entrance = $game->getEntrance($entrance_nr);
     $game->stats["x"] = $entrance->x;
     $game->stats["y"] = $entrance->y;
 
@@ -105,6 +119,17 @@ class Game implements JsonSerializable {
     $game->save();
   }
 
+  // load game of logged in user
+  public static function load() {
+    $username = $_SESSION["user"]->name;
+    if (!$GLOBALS["db"]->exists("games", array("username"), array("username" => $username)))
+      Game::newGame("exampleDungeon");
+    $game_array = $GLOBALS["db"]->selectAll("games", array("username" => $username))[0];
+    $game_unpacked = json_decode($game_array["json_data"]);
+    $game = new Game();
+    apply_arr($game_unpacked, $game);
+    return $game;
+  }
   public static function loadGame($id) {
     $game_array = $GLOBALS["db"]->selectAll("games", array("id" => $id))[0];
     $game_unpacked = json_decode($game_array["json_data"]);
@@ -114,6 +139,9 @@ class Game implements JsonSerializable {
   }
   public static function deleteGame($id) {
     $GLOBALS["db"]->remove("games", array("id" => $id));
+  }
+  public function delete() {
+    $GLOBALS["db"]->remove("games", array("id" => $this->id));
   }
   public static function listGames($username = false) {
     if (!$username) $username = $_SESSION["user"]->name;

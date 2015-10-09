@@ -1,18 +1,20 @@
 <?php
 
+User::requireLoggedIn();
+
 if (require_params("new")) {
   Game::newGame($_REQUEST["new"]);
 }
-if (require_params("delete")) {
-  Game::deleteGame($_REQUEST["id"]);
-  unset($_REQUEST["id"]);
+if (require_params("reset")) {
+  $game = Game::load();
+  $game->delete();
 }
 
-if (require_params("id")):
-  $game = Game::loadGame($_REQUEST["id"]);
+if (true):
+  $game = Game::load();
 ?>
-<h2><?= $game->name ?></h2>
-<div id="game-container" class="game-tile" data-gameid="<?=$_REQUEST["id"]?>"></div>
+<h2><?= $game->name ?></h2><a href="?reset=true">Reset Dungeons</a>
+<div id="game-container" class="game-tile"></div>
 
 <script type="text/javascript">
 TLOR.setup($('#game-container'), <?=json_encode($game)?>, {});

@@ -85,4 +85,11 @@ class User {
     if (array_key_exists("user", $_SESSION))
       $_SESSION["user"] = User::load($_SESSION["user"]->name);
   }
+  // checks if user is logged in and if not redirect to index
+  public static function requireLoggedIn() {
+    if (!array_key_exists("user", $_SESSION)) {
+      header("Location: /");
+      die();
+    }
+  }
 }

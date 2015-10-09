@@ -37,8 +37,16 @@ the entity get triggered. Entities are executed in from the begin of
 the list to the end.
 
 ```
-{
+{ // the player will spawn at the first entrance entity by default.
   "type": "entrance",
+  "number": 1, // an entrance can have a number to be referenced by an exit
+  "x": 0,
+  "y": 14
+},
+{
+  "type": "exit",
+  "toDungeon": "cave", // reference to other dungeon. use filename without .json extension.
+  "number": 1, // specify at which entrance the player should spawn. omit to use the default entrance.
   "x": 0,
   "y": 14
 },
