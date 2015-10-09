@@ -138,15 +138,19 @@ footer #authors {
   }
 
   #dialog {
+    display: none;
     position: absolute;
     top: 40px;
-    left: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
     width: 80%;
-    height: 200px;
     margin: 0 auto;
+    padding: 4%;
     background-color: #efefef;
     border: 10px solid transparent;
     @include border-image('/static/img/border.png', 8 round);
+
+    text-align: center;
   }
 }
 

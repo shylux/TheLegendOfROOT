@@ -99,7 +99,7 @@ TLOR.play = function() {
     }
   }
   // setup dialog
-  TLOR.dialog = $('<div id="dialog"></div>');
+  TLOR.dialog = $('<div id="dialog">This is a message</div>');
   TLOR.el.append(TLOR.dialog);
   // place player
   TLOR.newTile(TLOR.stats.x, TLOR.stats.y).addClass('player');
@@ -130,7 +130,7 @@ TLOR.play = function() {
     }
     e.preventDefault();
 
-    if (TLOR.requestInProgress || TLOR.actionQueue.length > 0) return; // avoid walking too far
+    if (TLOR.requestInProgress || TLOR.actionQueue.length > 0 || TLOR.dialog.is(':visible')) return; // avoid walking too far
     $.getJSON('api.php', {id:TLOR.id, action: action}, TLOR.handleActions);
   });
 
@@ -139,6 +139,13 @@ TLOR.play = function() {
   });
   $(document).ajaxStop(function() {
     TLOR.requestInProgress = false;
+  });
+
+  $(document).click(function() {
+    if (TLOR.dialog.is(':visible')) {
+      TLOR.dialog.hide();
+      TLOR.executeActions();
+    }
   });
 };
 
@@ -161,10 +168,15 @@ TLOR.executeActions = function() {
       TLOR.newTile(command.x, command.y).addClass('player');
       break;
     case "message":
-      alert(command.message);
-      break;
+      TLOR.showMessage(command.message);
+      return;
     default:
       console.error(sprintf("Unknown action: %s", command.action));
   }
   if (TLOR.actionQueue.length > 0) setTimeout(TLOR.executeActions, 400);
+}
+
+TLOR.showMessage = function(message) {
+  TLOR.dialog.text(message);
+  TLOR.dialog.show();
 }
