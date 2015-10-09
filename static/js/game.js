@@ -125,6 +125,12 @@ TLOR.play = function() {
       case 40:
         action = 'down';
         break;
+      case 13:
+        if (TLOR.dialog.is(':visible')) {
+          TLOR.confirmDialog();
+          break;
+        }
+        return;
       default:
         return;
     }
@@ -141,12 +147,7 @@ TLOR.play = function() {
     TLOR.requestInProgress = false;
   });
 
-  $(document).click(function() {
-    if (TLOR.dialog.is(':visible')) {
-      TLOR.dialog.hide();
-      TLOR.executeActions();
-    }
-  });
+  $(document).click(TLOR.confirmDialog);
 };
 
 TLOR.requestInProgress = false;
@@ -179,4 +180,10 @@ TLOR.executeActions = function() {
 TLOR.showMessage = function(message) {
   TLOR.dialog.text(message);
   TLOR.dialog.show();
+}
+TLOR.confirmDialog = function() {
+  if (TLOR.dialog.is(':visible')) {
+    TLOR.dialog.hide();
+    TLOR.executeActions();
+  }
 }
