@@ -8,6 +8,8 @@ if (require_params("new")) {
 if (require_params("reset")) {
   $game = Game::load();
   $game->delete();
+  header("Location: /game");
+  die();
 }
 
 if (true):

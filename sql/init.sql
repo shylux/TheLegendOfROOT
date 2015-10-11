@@ -13,7 +13,6 @@ CREATE TABLE games (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   username TEXT NOT NULL,
-  recommendedLevel INTEGER NOT NULL,
   json_data BLOB NOT NULL,
   FOREIGN KEY(username) REFERENCES users(name)
 );

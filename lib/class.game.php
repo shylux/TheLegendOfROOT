@@ -43,6 +43,8 @@ class Game implements JsonSerializable {
         $this->exitDungeon($entity);
         $action_log[] = array("action" => "refreshBrowser");
         break;
+      case "entrance":
+        return;
       default:
       $action_log[] = array(
         "action" => "message",
@@ -53,7 +55,11 @@ class Game implements JsonSerializable {
   }
   public function exitDungeon($entity) {
     $this->delete();
-    Game::newGame($entity->toDungeon, $entity->number);
+    if (isset($entity->number))
+      Game::newGame($entity->toDungeon, $entity->number);
+    else {
+      Game::newGame($entity->toDungeon);
+    }
   }
 
   public function getNewCoords($direction) {
@@ -123,7 +129,7 @@ class Game implements JsonSerializable {
   public static function load() {
     $username = $_SESSION["user"]->name;
     if (!$GLOBALS["db"]->exists("games", array("username"), array("username" => $username)))
-      Game::newGame("exampleDungeon");
+      Game::newGame("origin");
     $game_array = $GLOBALS["db"]->selectAll("games", array("username" => $username))[0];
     $game_unpacked = json_decode($game_array["json_data"]);
     $game = new Game();

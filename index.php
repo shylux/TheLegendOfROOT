@@ -34,7 +34,7 @@
     </div>
   </header>
 	<div id="content">
-	<?php include_once( ( !isset($_GET['include']) ) ? 'welcome.php' : "{$_GET['include']}" ); ?> 
+	<?php include_once( ( !isset($_GET['include']) ) ? 'welcome.php' : "{$_GET['include']}" ); ?>
 	</div>
 	<footer>
 		<div id="authors">

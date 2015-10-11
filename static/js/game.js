@@ -154,13 +154,13 @@ TLOR.requestInProgress = false;
 TLOR.actionQueue = [];
 // executes commands given by server
 TLOR.handleActions = function(commands) {
-  console.log(commands);
   // start executing if queue is not running
   var startExecuting = (TLOR.actionQueue.length == 0);
   TLOR.actionQueue = TLOR.actionQueue.concat(commands);
   if (startExecuting) TLOR.executeActions();
 }
 TLOR.executeActions = function() {
+  if (TLOR.actionQueue.length == 0) return;
   command = TLOR.actionQueue.shift();
   switch (command.action) {
     case "movePlayer":
@@ -180,7 +180,8 @@ TLOR.executeActions = function() {
 }
 
 TLOR.showMessage = function(message) {
-  TLOR.dialog.text(message);
+  message = message.replace(/\n/g, '<br />');
+  TLOR.dialog.html(message);
   TLOR.dialog.show();
 }
 TLOR.confirmDialog = function() {

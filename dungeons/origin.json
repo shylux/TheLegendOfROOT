@@ -1,0 +1,49 @@
+{
+  "name": "The Origin",
+  "width": 15,
+  "height": 15,
+  "terrain": [[7,7,7,7,7,7,0,0,7,7,7,7,7,7,7],[7,4,7,4,7,7,0,0,7,4,7,7,2,2,7],[7,7,4,7,7,7,0,0,7,7,7,7,2,2,7],[7,7,4,7,7,7,0,0,0,7,7,7,7,7,7],[7,7,7,7,7,7,0,0,0,0,0,0,7,7,7],[7,7,7,7,4,4,0,0,0,7,7,0,7,4,7],[7,4,7,4,7,4,7,0,7,7,7,0,7,7,7],[7,7,7,7,4,7,7,0,7,7,7,0,7,7,7],[7,7,7,7,7,0,0,0,0,0,0,7,7,7,7],[7,7,7,7,4,0,7,0,0,0,0,7,7,7,7],[7,4,7,7,7,4,0,0,0,0,0,7,7,7,4],[7,4,7,7,7,7,7,0,7,7,7,7,7,7,4],[7,7,7,7,7,7,7,7,7,7,7,7,7,7,7],[7,7,7,7,7,7,4,7,7,7,7,4,7,7,7],[7,7,7,7,7,4,4,7,7,7,7,4,7,7,7]],
+  "entities": [
+    {
+      "type": "entrance",
+      "x": 9,
+      "y": 9
+    },
+    {
+      "type": "entrance",
+      "number": 1,
+      "x": 6,
+      "y": 0
+    },
+    {
+      "type": "message",
+      "message": "Welcome to The Legend of ROOT!",
+      "x": 7,
+      "y": 8
+    },
+    {
+      "type": "message",
+      "message": "It seems you figured out how to move around. Congratulations, you qualify to be the hero of the game.",
+      "x": 7,
+      "y": 8
+    },
+    {
+      "type": "message",
+      "message": "This is all it takes you ask? Duh, its singleplayer.\nI can assure you if this was multiplayer you would get your ass handed to you by now.",
+      "x": 7,
+      "y": 6
+    },
+    {
+      "type": "exit",
+      "toDungeon": "happyfields",
+      "x": 6,
+      "y": 0
+    },
+    {
+      "type": "exit",
+      "toDungeon": "happyfields",
+      "x": 7,
+      "y": 0
+    }
+  ]
+}

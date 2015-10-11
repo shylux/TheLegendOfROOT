@@ -7,6 +7,20 @@ $sitewidth: 800px;
   -webkit-transform: rotate($amount); /* Chrome, Safari, Opera */
   transform: rotate($amount);
 }
+@mixin rotation() {
+  &.up {
+    @include rotate(180deg);
+  }
+  &.right {
+    @include rotate(270deg);
+  }
+  &.down {
+    @include rotate(0deg);
+  }
+  &.left {
+    @include rotate(90deg);
+  }
+}
 @mixin border-image($url, $options) {
   -webkit-border-image: url($url) $options; /* Safari 3.1-5 */
   -o-border-image: url($url) $options; /* Opera 11-12.1 */
@@ -108,23 +122,17 @@ footer #authors {
         }
 
         &.entrance {
-          background-color: black;
+          @include sprite(none);
         }
         &.exit {
-          background-color: red;
+          background-color: #666;
+          @include sprite(caveentrance);
+          @include rotation();
         }
 
         &.movePlayer {
           @include sprite(move);
-          &.right {
-            @include rotate(180deg);
-          }
-          &.up {
-            @include rotate(90deg);
-          }
-          &.down {
-            @include rotate(270deg);
-          }
+          @include rotation();
         }
 
       }
