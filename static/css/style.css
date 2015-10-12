@@ -63,6 +63,33 @@ footer #authors {
         .game-tile table td img[data-terr="6"] {
           background-color: #d6b55f;
           content: url(/static/img/sprites/sand.png); }
+        .game-tile table td img[data-terr="7"] {
+          background-color: transparent;
+          content: url(/static/img/sprites/tree.png); }
+        .game-tile table td img[data-terr="8"] {
+          background-color: transparent;
+          content: url(/static/img/sprites/water2.png); }
+        .game-tile table td img[data-terr="9"] {
+          background-color: transparent;
+          content: url(/static/img/sprites/cave.png); }
+        .game-tile table td img[data-terr="10"] {
+          background-color: transparent;
+          content: url(/static/img/sprites/bush.png); }
+        .game-tile table td img[data-terr="11"] {
+          background-color: transparent;
+          content: url(/static/img/sprites/tree2.png); }
+        .game-tile table td img[data-terr="12"] {
+          background-color: transparent;
+          content: url(/static/img/sprites/grass2.png); }
+        .game-tile table td img[data-terr="13"] {
+          background-color: transparent;
+          content: url(/static/img/sprites/wall.png); }
+        .game-tile table td img[data-terr="14"] {
+          background-color: transparent;
+          content: url(/static/img/sprites/item.png); }
+        .game-tile table td img[data-terr="15"] {
+          background-color: transparent;
+          content: url(/static/img/sprites/sand2.png); }
         .game-tile table td img.player {
           content: url(/static/img/sprites/player.png); }
         .game-tile table td img.entrance {
@@ -122,8 +149,6 @@ footer #authors {
             transform: rotate(90deg); }
     .game-tile table td {
       background-color: #446d1c; }
-      .game-tile table td img[data-terr="7"] {
-        content: url(/static/img/sprites/tree.png); }
   .game-tile #dialog {
     display: none;
     position: absolute;

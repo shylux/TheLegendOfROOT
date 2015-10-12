@@ -1,3 +1,5 @@
+@import "terrain";
+
 $sitewidth: 800px;
 @mixin sprite($name) {
   content: url(/static/img/sprites/#{$name}.png);
@@ -25,6 +27,12 @@ $sitewidth: 800px;
   -webkit-border-image: url($url) $options; /* Safari 3.1-5 */
   -o-border-image: url($url) $options; /* Opera 11-12.1 */
   border-image: url($url) $options;
+}
+@mixin terrain($id, $filename, $background-color:transparent) {
+  &[data-terr="#{$id}"] {
+    background-color: $background-color;
+    @include sprite($filename);
+  }
 }
 
 html, body {
@@ -87,34 +95,22 @@ footer #authors {
         min-height: 100%;
         width: 100%;
 
-        &[data-terr="0"] {
-          background-color: #060;
-          @include sprite(grass);
-        }
-        &[data-terr="1"] {
-          background-color: #666;
-          @include sprite(rock);
-        }
-        &[data-terr="2"] {
-          background-color: #33ADFF;
-          @include sprite(water);
-        }
-        &[data-terr="3"] {
-          background-color: #472400;
-          @include sprite(bridge);
-        }
-        &[data-terr="4"] {
-          background-color: #360;
-          @include sprite(tallgrass);
-        }
-        &[data-terr="5"] {
-          background-color: #C90;
-          @include sprite(road);
-        }
-        &[data-terr="6"] {
-          background-color: #d6b55f;
-          @include sprite(sand);
-        }
+        @include terrain(0, grass, #060);
+        @include terrain(1, rock, #666);
+        @include terrain(2, water, #33ADFF);
+        @include terrain(3, bridge, #472400);
+        @include terrain(4, tallgrass, #360);
+        @include terrain(5, road, #C90);
+        @include terrain(6, sand, #d6b55f);
+        @include terrain(7, tree);
+        @include terrain(8, water2);
+        @include terrain(9, cave);
+        @include terrain(10, bush);
+        @include terrain(11, tree2);
+        @include terrain(12, grass2);
+        @include terrain(13, wall);
+        @include terrain(14, item);
+        @include terrain(15, sand2);
 
 
         &.player {
@@ -139,9 +135,6 @@ footer #authors {
     }
     td {
       background-color: #446d1c;
-      img[data-terr="7"] {
-        @include sprite(tree);
-      }
     }
   }
 

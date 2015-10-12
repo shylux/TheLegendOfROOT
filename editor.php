@@ -31,7 +31,7 @@
     <div><b>Available Terrains</b> Hold <code>ctrl</code> and click to fill rects.</div>
     <table>
       <tr>
-        <?php for ($i = 0; $i <= 7; $i++) { ?>
+        <?php for ($i = 0; $i <= 15; $i++) { ?>
         <td><img data-terr="<?= $i ?>"></td>
         <?php } ?>
       </tr>
