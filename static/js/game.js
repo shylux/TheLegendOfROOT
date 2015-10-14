@@ -93,8 +93,7 @@ TLOR.play = function() {
     if (entity.x && entity.y && !TLOR.isHidden(entity)) {
       var tile = TLOR.newTile(entity.x, entity.y);
       tile.addClass(entity.type);
-      if (entity.type == "movePlayer")
-        tile.addClass(entity.direction);
+      tile.addClass(entity.direction);
     }
   }
   // setup dialog
@@ -102,6 +101,7 @@ TLOR.play = function() {
   TLOR.el.append(TLOR.dialog);
   // place player
   TLOR.newTile(TLOR.stats.x, TLOR.stats.y).addClass('player');
+  TLOR.focusPlayer();
 
   // add controls
   TLOR.el.append(controls);
@@ -166,6 +166,7 @@ TLOR.executeActions = function() {
     case "movePlayer":
       TLOR.el.find('.player').remove();
       TLOR.newTile(command.x, command.y).addClass('player');
+      TLOR.focusPlayer();
       break;
     case "message":
       TLOR.showMessage(command.message);
@@ -188,5 +189,18 @@ TLOR.confirmDialog = function() {
   if (TLOR.dialog.is(':visible')) {
     TLOR.dialog.hide();
     TLOR.executeActions();
+  }
+}
+
+TLOR.focusPlayer = function() {
+  var playerPos = $(TLOR.el).find('.player').offset().top;
+  var scrollTop = $('body').scrollTop();
+  var padding = 50;
+
+  if (playerPos-padding < scrollTop) {
+    $('body').scrollTop(playerPos-$(window).height()*0.2);
+  }
+  if (playerPos+padding > scrollTop + $(window).height()) {
+    $('body').scrollTop(playerPos-$(window).height()*0.8);
   }
 }

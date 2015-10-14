@@ -140,11 +140,11 @@ footer #authors {
 
   #dialog {
     display: none;
-    position: absolute;
-    top: 40px;
+    position: fixed;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, 0);
-    width: 80%;
+    transform: translate(-50%, -50%);
+    width: $sitewidth*0.8;
     margin: 0 auto;
     padding: 4%;
     background-color: #efefef;
@@ -169,4 +169,9 @@ footer #authors {
       border: 2px solid red;
     }
   }
+}
+#position {
+  position: fixed;
+  bottom: 0;
+  background-color: white;
 }
