@@ -41,6 +41,9 @@ class Game implements JsonSerializable {
       case "movePlayer":
         $action_log = array_merge($action_log, $this->move($entity->direction));
         break;
+      case "monster":
+        $action_log[] = array("action" => "monster");
+        break;
       case "exit":
         $this->exitDungeon($entity);
         $action_log[] = array("action" => "refreshBrowser");

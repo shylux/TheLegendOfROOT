@@ -34,6 +34,19 @@
       "y": 6
     },
     {
+      "type": "monster",
+      "name": "Steffan",
+      "entranceText": "Hei, knöpp de möp.",
+      "exitText": "Tschau du sau!",
+      "class": 0,
+      "att": 4,
+      "def": 5,
+      "agi": 6,
+      "x": 11,
+      "y": 7,
+      "hidden": false
+    },
+    {
       "type": "exit",
       "toDungeon": "happyfields",
       "x": 6,

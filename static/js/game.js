@@ -171,6 +171,9 @@ TLOR.executeActions = function() {
     case "message":
       TLOR.showMessage(command.message);
       return;
+    case "monster":
+      TLOR.showFight(command);
+      return;
     case "refreshBrowser":
       location.reload();
       return;
@@ -203,4 +206,20 @@ TLOR.focusPlayer = function() {
   if (playerPos+padding > scrollTop + $(window).height()) {
     $('body').scrollTop(playerPos-$(window).height()*0.8);
   }
+}
+
+fight_html = `
+  <div id="monster">
+    <img />
+  </div>
+`;
+poke_url = "http://images.alexonsager.net/pokemon/fused/%i/%i.%i.png"
+TLOR.showFight = function(data) {
+  TLOR.dialog.html(fight_html);
+  TLOR.dialog.find('img').attr('src', TLOR.getRandomMonsterImg());
+  TLOR.dialog.show();
+}
+TLOR.getRandomMonsterImg = function() {
+  var pokes = [Math.floor(Math.random() * 151) + 1, Math.floor(Math.random() * 151) + 1];
+  return sprintf(poke_url, pokes[0], pokes[0], pokes[1]);
 }
