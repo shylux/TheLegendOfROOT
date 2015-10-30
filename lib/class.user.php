@@ -15,6 +15,7 @@ class User {
   public $att = 0;
   public $def = 0;
   public $agi = 0;
+  public $json_data = array();
 
   public function level() {
     return floor(sqrt($this->xp));
@@ -59,18 +60,22 @@ class User {
                 array("name" => $username,
                       "email" => $email,
                       "pass_hash" => salt_hash($password),
-                      "class" => $class));
+                      "class" => $class,
+                      "json_data" => json_encode(array())));
     return User::load($username);
   }
 
   public static function load($username) {
     $user_array = $GLOBALS["db"]->selectAll("users", array("name" => $username))[0];
+    $user_array['json_data'] = json_decode($user_array['json_data'], true);
     $user = new User();
     apply_arr($user_array, $user);
     return $user;
   }
   public function save() {
+    $this->json_data = json_encode($this->json_data);
     $GLOBALS["db"]->update("users", $this, array("name" => $this->name));
+    $this->json_data = json_decode($this->json_data, true);
   }
 
   public static function login($username, $password) {

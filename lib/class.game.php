@@ -32,6 +32,8 @@ class Game implements JsonSerializable {
   public function executeEntity($entity, &$action_log) {
     switch ($entity->type) {
       case "message":
+        if ($this->checkReadMessages($entity))
+          break;
         $action_log[] = array(
           "action" => "message",
           "message" => $entity->message);
@@ -91,6 +93,22 @@ class Game implements JsonSerializable {
         $entities[] = $entity;
     }
     return $entities;
+  }
+  public function getEntityId($entity) {
+    return hash("md5", $this->name . json_encode($entity));
+  }
+  /* Checks if message has already been read by user. If so returns true.
+     Otherwise adds message to read messages and returns false. */
+  public function checkReadMessages($message) {
+    $user = $_SESSION["user"];
+    if (!isset($user->json_data["read_messages"]))
+      $user->json_data["read_messages"] = array();
+    $ret = in_array($this->getEntityId($message), $user->json_data["read_messages"]);
+    if (!$ret) {
+      $user->json_data["read_messages"][] = $this->getEntityId($message);
+      $user->save();
+    }
+    return $ret;
   }
   public function getEntrance($entrance_nr) {
     $default_entrance = null;
