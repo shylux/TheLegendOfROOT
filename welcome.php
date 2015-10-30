@@ -1,1 +1,1 @@
-Willkommen in der Welt der Informatiker!
+<?=_("Welcome!") ?>

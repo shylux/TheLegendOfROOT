@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: shylux@gmail.com\n"
-"POT-Creation-Date: 2015-10-07 18:15+0200\n"
+"POT-Creation-Date: 2015-10-15 16:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/load.php:39
-msgid "A string to be translated would go here"
+#: welcome.php:1
+msgid "Welcome!"
 msgstr ""

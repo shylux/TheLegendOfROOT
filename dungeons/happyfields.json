@@ -10,6 +10,12 @@
       "y": 37
     },
     {
+      "type": "entrance",
+      "number": 1,
+      "x": 33,
+      "y": 7
+    },
+    {
       "type": "message",
       "message": "Welcome to the Happy Fields where everything is fluffy and nothing will kill you.",
       "x": 18,
@@ -27,6 +33,13 @@
       "number": 1,
       "x": 18,
       "y": 37
+    },
+    {
+      "type": "exit",
+      "toDungeon": "hole",
+      "direction": "left",
+      "x": 33,
+      "y": 7
     }
   ]
 }

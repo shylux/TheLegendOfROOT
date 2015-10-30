@@ -101,7 +101,6 @@ TLOR.play = function() {
   TLOR.el.append(TLOR.dialog);
   // place player
   TLOR.newTile(TLOR.stats.x, TLOR.stats.y).addClass('player');
-  TLOR.focusPlayer();
 
   // add controls
   TLOR.el.append(controls);
@@ -147,6 +146,7 @@ TLOR.play = function() {
   });
 
   $(document).click(TLOR.confirmDialog);
+  TLOR.focusPlayer();
 };
 
 TLOR.requestInProgress = false;
@@ -200,7 +200,7 @@ TLOR.focusPlayer = function() {
   if (playerPos-padding < scrollTop) {
     $('body').scrollTop(playerPos-$(window).height()*0.2);
   }
-  if (playerPos+padding > scrollTop + $(window).height()) {
+  if (playerPos+padding > scrollTop + $(window).height() - $(TLOR.el).find('.player').height()) {
     $('body').scrollTop(playerPos-$(window).height()*0.8);
   }
 }
