@@ -166,6 +166,29 @@ footer #authors {
     /* Opera 11-12.1 */
     border-image: url("/static/img/border.png") 8 round;
     text-align: center; }
+    .game-tile #dialog #battle #user, .game-tile #dialog #battle #monster {
+      width: 45%; }
+    .game-tile #dialog #battle #user {
+      float: left; }
+    .game-tile #dialog #battle #monster {
+      float: right; }
+    .game-tile #dialog #battle #text {
+      clear: both;
+      border-top: 2px solid black;
+      padding: 10px;
+      font-size: 1.5em; }
+    .game-tile #dialog #battle .hp, .game-tile #dialog #battle .currHp, .game-tile #dialog #battle .label {
+      width: 100%;
+      height: 20px; }
+    .game-tile #dialog #battle .hp {
+      position: relative;
+      background-color: red; }
+    .game-tile #dialog #battle .currHp {
+      position: absolute;
+      background-color: green; }
+    .game-tile #dialog #battle .label {
+      position: absolute;
+      position: absolute; }
 
 #terrain-select.game-tile table {
   width: inherit;

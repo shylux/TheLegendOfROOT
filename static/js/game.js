@@ -171,6 +171,9 @@ TLOR.executeActions = function() {
     case "message":
       TLOR.showMessage(command.message);
       return;
+    case "battle":
+      TLOR.showFight(command);
+      return;
     case "refreshBrowser":
       location.reload();
       return;
@@ -187,8 +190,12 @@ TLOR.showMessage = function(message) {
 }
 TLOR.confirmDialog = function() {
   if (TLOR.dialog.is(':visible')) {
-    TLOR.dialog.hide();
-    TLOR.executeActions();
+    if (TLOR.dialog.find("> #battle").length && runningFight.log.length > 0) { // its a battle. lets continue
+      TLOR.playFight();
+    } else {
+      TLOR.dialog.hide();
+      TLOR.executeActions();
+    }
   }
 }
 
@@ -203,4 +210,60 @@ TLOR.focusPlayer = function() {
   if (playerPos+padding > scrollTop + $(window).height()) {
     $('body').scrollTop(playerPos-$(window).height()*0.8);
   }
+}
+
+fight_html = `
+  <div id="battle">
+    <div id="user">
+      <div class="name">You</div>
+      <div class="hp">
+        <div class="currHp"></div>
+        <div class="label"><span class="numCurrHp">12</span>/<span class="numMaxHp">40</span></div>
+      </div>
+    </div>
+    <div id="monster">
+      <div class="name">Monster Name</div>
+      <div class="hp">
+        <div class="currHp"></div>
+        <div class="label"><span class="numCurrHp">12</span>/<span class="numMaxHp">40</span></div>
+      </div>
+      <img />
+    </div>
+    <div id="text">
+      Here comes the text.
+    </div>
+  </div>
+`;
+poke_url = "http://images.alexonsager.net/pokemon/fused/%i/%i.%i.png"
+TLOR.showFight = function(data) {
+  TLOR.dialog.html(fight_html);
+  TLOR.dialog.find('#monster img').attr('src', TLOR.getRandomMonsterImg());
+  TLOR.dialog.find('#monster .name').text(data.monster.name);
+  TLOR.dialog.find('#user .name').text(data.user.name);
+  TLOR.dialog.find('#user .numCurrHp, #user .numMaxHp').text(data.user_maxHealth);
+  TLOR.dialog.find('#monster .numCurrHp, #monster .numMaxHp').text(data.monster.hp);
+  runningFight = data;
+  TLOR.dialog.show();
+  TLOR.playFight();
+}
+
+runningFight = {}
+TLOR.playFight = function() {
+  fightStep = runningFight.log.shift();
+  if (fightStep.text) {
+    TLOR.dialog.find('#text').text(fightStep.text);
+  }
+  if (fightStep.hasOwnProperty('monster')) {
+    TLOR.dialog.find('#monster .numCurrHp').text(fightStep.monster);
+    TLOR.dialog.find('#monster .currHp').css("width", (fightStep.monster * 100 / runningFight.monster.hp)+'%');
+  }
+  if (fightStep.hasOwnProperty('user')) {
+    TLOR.dialog.find('#user .numCurrHp').text(fightStep.user);
+    TLOR.dialog.find('#user .currHp').css("width", (fightStep.user * 100 / runningFight.user_maxHealth)+'%');
+  }
+}
+
+TLOR.getRandomMonsterImg = function() {
+  var pokes = [Math.floor(Math.random() * 151) + 1, Math.floor(Math.random() * 151) + 1];
+  return sprintf(poke_url, pokes[0], pokes[0], pokes[1]);
 }

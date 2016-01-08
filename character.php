@@ -20,14 +20,14 @@ if (isset($_REQUEST["up"]))
   <dt>Available Skillpoints</dt>
   <dd><?= $user->availableSkillpoints() ?></dd>
   <dt>Attack</dt>
-  <dd><?= $user->att ?></dd>
+  <dd><?= $user->attack() ?></dd>
   <dt>Defence</dt>
-  <dd><?= $user->def ?></dd>
-  <dt>Agility</dt>
-  <dd><?= $user->agi ?></dd>
+  <dd><?= $user->defence() ?></dd>
+  <dt>Health</dt>
+  <dd><?= $user->maxHealth() ?></dd>
 </dl>
 <?php if ($user->availableSkillpoints() > 0): ?>
 <a href="?up=att">Upgrade Attack</a>
 <a href="?up=def">Upgrade Defence</a>
-<a href="?up=agi">Upgrade Agility</a>
+<a href="?up=hp">Upgrade Health</a>
 <?php endif; ?>
