@@ -152,6 +152,41 @@ footer #authors {
     @include border-image('/static/img/border.png', 8 round);
 
     text-align: center;
+
+    #battle {
+      #user, #monster {
+        width: 45%;
+      }
+      #user {
+        float: left;
+      }
+      #monster {
+        float: right;
+      }
+      #text {
+        clear: both;
+        border-top: 2px solid black;
+        padding: 10px;
+        font-size: 1.5em;
+      }
+      .hp, .currHp, .label {
+        width: 100%;
+        height: 20px;
+      }
+
+      .hp {
+        position: relative;
+        background-color: red;
+      }
+      .currHp {
+        position: absolute;
+        background-color: green;
+      }
+      .label {
+        position: absolute;
+        position: absolute;
+      }
+    }
   }
 }
 

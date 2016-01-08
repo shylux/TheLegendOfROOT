@@ -14,16 +14,31 @@ class User {
   public $xp = 0;
   public $att = 0;
   public $def = 0;
-  public $agi = 0;
+  public $hp = 0;
+  public $currHp = 0;
   public $json_data = array();
 
+  public function maxHealth() {
+    return $this->hp * 3 + 10;
+  }
+  public function defence() {
+    return $this->def;
+  }
+  public function attack() {
+    return $this->att + 3;
+  }
+
+  private function baseLevel() {
+    return 5;
+  }
+
   public function level() {
-    return floor(sqrt($this->xp));
+    return $this->baseLevel() + $this->xp;
   }
 
   // invert of level()
   public function totXpForLv($level) {
-    return $level**2;
+    return $level - $this->baseLevel();
   }
 
   public function xpForNextLevel() {
@@ -31,10 +46,10 @@ class User {
   }
 
   public function totSkillpoints() {
-    return $this->level() * 2;
+    return $this->level() - $this->baseLevel();
   }
   public function availableSkillpoints() {
-    return $this->totSkillpoints() - ($this->att + $this->def + $this->agi);
+    return $this->totSkillpoints() - ($this->att + $this->def + $this->hp);
   }
 
   public function upgrade($skill) {
@@ -46,8 +61,8 @@ class User {
       case "def":
         $this->def += 1;
         break;
-      case "agi":
-        $this->agi += 1;
+      case "hp":
+        $this->hp += 1;
         break;
     }
     $this->save();
