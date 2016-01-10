@@ -1,5 +1,4 @@
 <?php require_once("lib/load.php");
-print_r($_SESSION["user"]);
 ?>
 
 <!DOCTYPE html>
