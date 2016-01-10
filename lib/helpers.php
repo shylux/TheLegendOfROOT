@@ -23,6 +23,10 @@ function apply_arr($arr, &$dest) {
   }
 }
 
+function isLoggedIn() {
+	return (isset($_SESSION["user"]));
+}
+
 // Combines parent dir with filename sent from client.
 // Throws exception if a directory traversal is detected.
 // Based on: http://stackoverflow.com/questions/4205141/preventing-directory-traversal-in-php-but-allowing-paths

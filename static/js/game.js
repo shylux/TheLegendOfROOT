@@ -139,11 +139,12 @@ TLOR.play = function() {
     $.getJSON('api.php', {id:TLOR.id, action: action}, TLOR.handleActions);
   });
 
-  $(document).ajaxStart(function() {
-    TLOR.requestInProgress = true;
+  $(document).ajaxStart(function() { 
+	// TLOR.requestInProgress = true;
+	// Issue with the chat, if it's open this will never be finish -> player isn't able to walk around
   });
   $(document).ajaxStop(function() {
-    TLOR.requestInProgress = false;
+	TLOR.requestInProgress = false;
   });
 
   $(document).click(TLOR.confirmDialog);
