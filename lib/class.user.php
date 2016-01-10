@@ -16,6 +16,7 @@ class User {
   public $def = 0;
   public $hp = 0;
   public $currHp = 0;
+  public $buddy_id;
   public $json_data = array();
 
   public function maxHealth() {
