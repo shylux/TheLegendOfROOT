@@ -5,9 +5,15 @@ User::requireLoggedIn();
 if (require_params("new")) {
   Game::newGame($_REQUEST["new"]);
 }
-if (require_params("reset")) {
+if (require_params("reset_dungeon")) {
   $game = Game::load();
   $game->delete();
+  header("Location: /game");
+  die();
+}
+if (require_params("reset_messages")) {
+  $_SESSION["user"]->json_data["read_messages"] = array();
+  $_SESSION["user"]->save();
   header("Location: /game");
   die();
 }
@@ -15,7 +21,9 @@ if (require_params("reset")) {
 if (true):
   $game = Game::load();
 ?>
-<h2><?= $game->name ?></h2><a href="?reset=true">Reset Dungeons</a>
+<h2><?= $game->name ?></h2>
+<a href="?reset_dungeon=true">Reset dungeon</a>
+<a href="?reset_messages=true">Reset read messages</a>
 <div id="game-container" class="game-tile"></div>
 
 <script type="text/javascript">
