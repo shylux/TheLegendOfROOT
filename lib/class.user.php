@@ -15,7 +15,8 @@ class User {
   public $att = 0;
   public $def = 0;
   public $hp = 0;
-  public $currHp = 0;
+  public $currHp = 0; 
+  public $buddy_id;
   public $json_data = array();
 
   public function maxHealth() {
@@ -66,7 +67,7 @@ class User {
         break;
     }
     $this->save();
-  }
+  } 
 
   public static function create($username, $email, $password, $class) {
     if ($GLOBALS["db"]->exists("users", array("name"), array("name" => $username)))
@@ -83,7 +84,7 @@ class User {
   public static function load($username) {
     $user_array = $GLOBALS["db"]->selectAll("users", array("name" => $username))[0];
     $user_array['json_data'] = json_decode($user_array['json_data'], true);
-    $user = new User();
+    $user = new User(); 
     apply_arr($user_array, $user);
     return $user;
   }

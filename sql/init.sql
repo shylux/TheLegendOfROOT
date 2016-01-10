@@ -1,13 +1,13 @@
-CREATE TABLE users (
-  name TEXT PRIMARY KEY NOT NULL,
-  email TEXT NOT NULL,
-  pass_hash TEXT NOT NULL,
-  class INTEGER NOT NULL,
-  xp INTEGER DEFAULT 0,
-  att INTEGER DEFAULT 0,
-  def INTEGER DEFAULT 0,
-  hp INTEGER DEFAULT 0,
-  json_data BLOB NOT NULL
+CREATE TABLE "users" 
+("name" TEXT NOT NULL ,
+"email" TEXT NOT NULL ,
+"pass_hash" TEXT NOT NULL ,
+"class" INTEGER NOT NULL ,
+"att" INTEGER DEFAULT (0) ,
+"def" INTEGER DEFAULT (0) ,
+"hp" INTEGER DEFAULT (0) ,
+"json_data" BLOB NOT NULL ,
+"buddy_id" INTEGER PRIMARY KEY NOT NULL
 );
 
 CREATE TABLE games (
