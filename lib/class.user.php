@@ -82,7 +82,8 @@ class User {
 
   public static function load($username) {
     $user_array = $GLOBALS["db"]->selectAll("users", array("name" => $username))[0];
-    $user_array['json_data'] = json_decode($user_array['json_data'], true);
+    if (array_key_exists('json_data', $user_array))
+      $user_array['json_data'] = json_decode($user_array['json_data'], true);
     $user = new User();
     apply_arr($user_array, $user);
     return $user;

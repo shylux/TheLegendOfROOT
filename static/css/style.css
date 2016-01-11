@@ -29,6 +29,7 @@ footer #authors {
 .game-tile {
   position: relative; }
   .game-tile table {
+    margin-top: 20px;
     width: 100%;
     table-layout: fixed; }
     .game-tile table tr {

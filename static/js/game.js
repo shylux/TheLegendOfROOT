@@ -12,6 +12,9 @@ TLOR.setup = function(jq_element, initial_dungeon_data) {
   TLOR.el = jq_element;
   TLOR = $.extend(TLOR, initial_dungeon_data);
 
+  TLOR.el.append($('<audio autoplay loop /><a href="javascript:TLOR.toggleSound()">Toggle sound</a>'));
+  TLOR.setSound();
+
   TLOR.el.append('<table cellspacing="0"><tbody></tbody></table>');
   if ('terrain' in TLOR) // create new terrain?
     TLOR.buildTerrain(TLOR.terrain);
@@ -194,6 +197,7 @@ TLOR.confirmDialog = function() {
       TLOR.playFight();
     } else {
       TLOR.dialog.hide();
+      TLOR.setSound();
       TLOR.executeActions();
     }
   }
@@ -210,6 +214,17 @@ TLOR.focusPlayer = function() {
   if (playerPos+padding > scrollTop + $(window).height()) {
     $('body').scrollTop(playerPos-$(window).height()*0.8);
   }
+}
+
+TLOR.setSound = function(sound) {
+  if (!sound && TLOR.sound) sound = TLOR.sound;
+  if (!sound) return;
+  var audio = TLOR.el.find('audio');
+  if (audio.attr('src') && endsWith(audio.attr('src'), sound)) return;
+  audio.attr('src', sprintf("/static/sound/%s", sound));
+}
+TLOR.toggleSound = function() {
+  TLOR.el.find('audio').get(0).muted = ! TLOR.el.find('audio').get(0).muted;
 }
 
 fight_html = `
@@ -244,6 +259,7 @@ TLOR.showFight = function(data) {
   TLOR.dialog.find('#monster .numCurrHp, #monster .numMaxHp').text(data.monster.hp);
   runningFight = data;
   TLOR.dialog.show();
+  TLOR.setSound('battle.mp3');
   TLOR.playFight();
 }
 
