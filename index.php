@@ -10,7 +10,8 @@
   <link rel="shortcut icon" type="image/x-icon" href="static/img/favicon.ico">
   <link rel="stylesheet" href="static/css/style.css">
   <script src="static/js/jquery.js"></script>
-  <script src="static/js/sprintf.min.js"></script>
+  <script src="static/js/js.cookie.js"></script>
+  <script src="static/js/helpers.js"></script>
   <script src="static/js/json2.js"></script>
   <script src="static/js/game.js"></script>
 </head>
