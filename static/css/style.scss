@@ -112,6 +112,9 @@ footer #authors {
         @include terrain(13, wall);
         @include terrain(14, item);
         @include terrain(15, sand2);
+        @include terrain(16, caveground);
+        @include terrain(17, cavegroundstop);
+        @include terrain(18, caverock);
 
 
         &.player {

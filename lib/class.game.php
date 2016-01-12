@@ -1,24 +1,15 @@
 <?php
 
 class Game implements JsonSerializable {
-  const PASSABLE_TERRAIN_IDS = [0, 3, 4, 5, 6];
+  const PASSABLE_TERRAIN_IDS = [0, 3, 4, 5, 6, 16, 17];
 
   public $id;
   public $username;
   public $stats = array(); // contains current health, position etc
 
   public function move($direction) {
-    $newPos = $this->getNewCoords($direction);
-    $this->checkCoords($newPos);
-    $this->stats->x = $newPos["x"];
-    $this->stats->y = $newPos["y"];
-
     $action_log = array();
-
-    $action_log[] = array(
-      "action" => "movePlayer",
-      "x" => $newPos["x"],
-      "y" => $newPos["y"]);
+    $action_log[] = $this->moveWithoutEntityCheck($direction);
 
     foreach ($this->getEntities($this->stats->x, $this->stats->y) as $entity) {
       $this->executeEntity($entity, $action_log);
@@ -27,6 +18,17 @@ class Game implements JsonSerializable {
     if (end($action_log)["action"] !== "exit")
       $this->save();
     return $action_log;
+  }
+  public function moveWithoutEntityCheck($direction) {
+    $newPos = $this->getNewCoords($direction);
+    $this->checkCoords($newPos);
+    $this->stats->x = $newPos["x"];
+    $this->stats->y = $newPos["y"];
+
+    return array(
+      "action" => "movePlayer",
+      "x" => $newPos["x"],
+      "y" => $newPos["y"]);
   }
 
   public function executeEntity($entity, &$action_log) {
@@ -39,6 +41,9 @@ class Game implements JsonSerializable {
           "message" => $entity->message);
         break;
       case "movePlayer":
+        $steps = isset($entity->steps) ? $entity->steps : 1;
+        for ($i = 0; $i < $steps-1; $i++)
+          $action_log[] = $this->moveWithoutEntityCheck($entity->direction);
         $action_log = array_merge($action_log, $this->move($entity->direction));
         break;
       case "monster":

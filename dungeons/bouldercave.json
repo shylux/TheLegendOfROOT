@@ -1,0 +1,333 @@
+{
+  "name": "Boulder Cave",
+  "sound": "happy_fields.mp3",
+  "width": 25,
+  "height": 25,
+  "terrain": [[1,1,1,1,1,1,1,1,1,18,18,18,18,18,18,18,18,1,1,1,1,1,1,18,1],[1,1,1,1,1,1,18,18,18,18,18,18,18,2,2,2,2,18,18,18,1,1,1,1,1],[1,1,18,18,2,2,2,2,2,18,18,2,2,2,18,18,2,2,2,18,18,18,18,1,1],[18,1,18,2,2,2,2,2,2,2,2,2,2,2,2,18,2,2,2,18,18,18,18,1,1],[1,1,18,2,2,2,2,2,2,2,2,2,2,2,2,18,18,2,2,18,18,18,18,18,18],[1,18,18,2,2,16,16,16,16,16,16,16,16,16,16,16,18,16,16,16,18,16,16,16,18],[1,18,18,18,16,16,16,16,16,18,18,17,18,16,18,16,18,16,18,18,18,17,18,16,18],[1,18,18,18,16,16,18,18,18,16,18,16,18,16,18,16,18,16,16,16,16,16,18,16,18],[1,18,18,18,18,16,16,16,16,16,16,16,18,16,16,16,16,16,18,16,16,16,18,16,18],[1,18,18,18,18,16,18,18,18,16,18,16,16,18,18,16,16,18,18,16,18,16,16,16,18],[1,18,18,18,18,16,16,16,16,16,17,16,16,18,18,16,16,18,16,16,18,16,18,18,18],[1,18,18,18,18,18,18,18,18,18,18,16,16,18,18,16,16,18,18,16,18,16,16,16,18],[1,1,18,18,18,18,16,16,16,16,16,16,18,18,16,16,16,16,16,17,18,16,18,16,18],[1,1,18,18,18,18,17,16,16,18,18,16,16,18,17,16,16,18,18,16,18,16,16,16,18],[1,1,18,18,18,16,16,16,16,18,16,16,16,16,16,16,16,16,16,16,16,16,18,16,18],[1,1,18,18,18,16,18,16,16,18,17,16,16,16,16,16,16,18,18,18,18,16,16,16,18],[1,1,18,18,18,16,18,16,16,18,16,16,16,16,16,18,18,16,16,16,16,16,18,16,18],[1,1,18,18,18,16,18,16,16,18,16,16,16,16,16,18,18,16,16,16,16,16,16,16,18],[1,1,18,18,18,17,18,16,16,16,16,18,16,16,16,17,18,16,17,16,16,18,16,16,18],[1,18,18,18,18,16,18,18,18,18,18,18,17,16,16,16,18,18,18,16,16,18,16,16,18],[1,18,18,18,18,16,16,16,16,16,16,16,16,16,16,16,16,17,18,16,16,18,16,16,18],[1,18,18,18,18,18,18,16,16,16,16,18,18,18,18,18,18,16,18,16,16,18,16,16,18],[1,1,1,18,18,18,18,18,16,16,16,18,18,18,18,18,18,16,16,16,16,18,16,16,18],[1,1,1,18,18,18,18,18,16,16,16,18,18,18,18,18,18,18,16,16,16,18,16,16,18],[1,1,1,18,18,18,18,18,18,16,18,18,18,18,18,18,18,18,18,18,16,18,18,18,18]],
+  "entities": [
+    {
+      "type": "entrance",
+      "number": 1,
+      "x": 20,
+      "y": 23
+    },
+    {
+      "type": "exit",
+      "toDungeon": "happyfields",
+      "number": 2,
+      "direction": "up",
+      "x": 20,
+      "y": 24
+    },
+    {
+      "type": "entrance",
+      "number": 2,
+      "x": 9,
+      "y": 23
+    },
+    {
+      "type": "exit",
+      "toDungeon": "happyfields",
+      "number": 3,
+      "direction": "up",
+      "x": 9,
+      "y": 24
+    },
+    {
+      "type": "movePlayer",
+      "direction": "up",
+      "steps": 4,
+      "x": 20,
+      "y": 21
+    },
+    {
+      "type": "movePlayer",
+      "direction": "up",
+      "steps": 5,
+      "x": 19,
+      "y": 21
+    },
+    {
+      "type": "movePlayer",
+      "direction": "left",
+      "steps": 2,
+      "x": 20,
+      "y": 17
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "steps": 2,
+      "x": 19,
+      "y": 16
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "steps": 2,
+      "x": 17,
+      "y": 16
+    },
+    {
+      "type": "movePlayer",
+      "direction": "down",
+      "x": 18,
+      "y": 17
+    },
+    {
+      "type": "movePlayer",
+      "direction": "up",
+      "steps": 2,
+      "x": 21,
+      "y": 16
+    },
+    {
+      "type": "movePlayer",
+      "direction": "up",
+      "steps": 2,
+      "x": 21,
+      "y": 14
+    },
+    {
+      "type": "movePlayer",
+      "direction": "up",
+      "steps": 4,
+      "x": 21,
+      "y": 12
+    },
+    {
+      "type": "movePlayer",
+      "direction": "up",
+      "steps": 2,
+      "x": 21,
+      "y": 8
+    },
+    {
+      "type": "movePlayer",
+      "direction": "down",
+      "steps": 4,
+      "x": 19,
+      "y": 8
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "x": 20,
+      "y": 14
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "x": 18,
+      "y": 12
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "x": 14,
+      "y": 8
+    },
+    {
+      "type": "movePlayer",
+      "direction": "down",
+      "steps": 4,
+      "x": 16,
+      "y": 9
+    },
+    {
+      "type": "movePlayer",
+      "direction": "down",
+      "steps": 4,
+      "x": 15,
+      "y": 8
+    },
+    {
+      "type": "movePlayer",
+      "direction": "up",
+      "steps": 2,
+      "x": 11,
+      "y": 8
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "steps": 3,
+      "x": 8,
+      "y": 8
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "steps": 2,
+      "x": 6,
+      "y": 10
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "steps": 2,
+      "x": 8,
+      "y": 10
+    },
+    {
+      "type": "movePlayer",
+      "direction": "up",
+      "steps": 4,
+      "x": 11,
+      "y": 12
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "steps": 4,
+      "x": 7,
+      "y": 12
+    },
+    {
+      "type": "movePlayer",
+      "direction": "left",
+      "steps": 2,
+      "x": 8,
+      "y": 13
+    },
+    {
+      "type": "movePlayer",
+      "direction": "down",
+      "steps": 4,
+      "x": 5,
+      "y": 14
+    },
+    {
+      "type": "movePlayer",
+      "direction": "up",
+      "steps": 4,
+      "x": 8,
+      "y": 17
+    },
+    {
+      "type": "movePlayer",
+      "direction": "up",
+      "steps": 5,
+      "x": 7,
+      "y": 17
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "steps": 3,
+      "x": 15,
+      "y": 12
+    },
+    {
+      "type": "movePlayer",
+      "direction": "left",
+      "steps": 2,
+      "x": 16,
+      "y": 13
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "steps": 5,
+      "x": 15,
+      "y": 14
+    },
+    {
+      "type": "movePlayer",
+      "direction": "down",
+      "steps": 2,
+      "x": 13,
+      "y": 14
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "steps": 2,
+      "x": 11,
+      "y": 14
+    },
+    {
+      "type": "movePlayer",
+      "direction": "left",
+      "steps": 2,
+      "x": 16,
+      "y": 15
+    },
+    {
+      "type": "movePlayer",
+      "direction": "down",
+      "steps": 2,
+      "x": 14,
+      "y": 15
+    },
+    {
+      "type": "movePlayer",
+      "direction": "left",
+      "steps": 2,
+      "x": 12,
+      "y": 15
+    },
+    {
+      "type": "movePlayer",
+      "direction": "down",
+      "steps": 2,
+      "x": 13,
+      "y": 16
+    },
+    {
+      "type": "movePlayer",
+      "direction": "down",
+      "steps": 2,
+      "x": 14,
+      "y": 17
+    },
+    {
+      "type": "movePlayer",
+      "direction": "up",
+      "steps": 2,
+      "x": 12,
+      "y": 17
+    },
+    {
+      "type": "movePlayer",
+      "direction": "up",
+      "steps": 3,
+      "x": 11,
+      "y": 17
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "steps": 2,
+      "x": 13,
+      "y": 18
+    },
+    {
+      "type": "movePlayer",
+      "direction": "left",
+      "steps": 2,
+      "x": 14,
+      "y": 19
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "x": 16,
+      "y": 20
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "steps": 2,
+      "x": 14,
+      "y": 20
+    },
+    {
+      "type": "movePlayer",
+      "direction": "right",
+      "steps": 2,
+      "x": 12,
+      "y": 20
+    }
+  ]
+}

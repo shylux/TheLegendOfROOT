@@ -91,6 +91,15 @@ footer #authors {
         .game-tile table td img[data-terr="15"] {
           background-color: transparent;
           content: url(/static/img/sprites/sand2.png); }
+        .game-tile table td img[data-terr="16"] {
+          background-color: transparent;
+          content: url(/static/img/sprites/caveground.png); }
+        .game-tile table td img[data-terr="17"] {
+          background-color: transparent;
+          content: url(/static/img/sprites/cavegroundstop.png); }
+        .game-tile table td img[data-terr="18"] {
+          background-color: transparent;
+          content: url(/static/img/sprites/caverock.png); }
         .game-tile table td img.player {
           content: url(/static/img/sprites/player.png); }
         .game-tile table td img.entrance {
