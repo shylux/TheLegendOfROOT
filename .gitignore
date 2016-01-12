@@ -3,5 +3,6 @@
 logs/*
 !logs/.gitkeep
 *.sqlite
-captcha/
+captcha/*
+!captcha/.gitkeep
 .sass-cache
