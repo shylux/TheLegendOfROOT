@@ -1,3 +1,3 @@
-rm root.db
-sqlite3 root.db < sql/init.sql
-sqlite3 root.db < sql/test_data.sql
+rm root.db.sqlite
+sqlite3 root.db.sqlite < sql/init.sql
+sqlite3 root.db.sqlite < sql/test_data.sql

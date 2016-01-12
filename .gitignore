@@ -1,5 +1,7 @@
 *.db
+*.data
 logs/*
 !logs/.gitkeep
 *.sqlite
+captcha/
 .sass-cache
