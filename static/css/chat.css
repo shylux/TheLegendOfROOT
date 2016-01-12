@@ -1,3 +1,10 @@
+#chatPrison {
+	margin-left:200px !important;
+}
+html, body {
+	height:auto;
+}
+
 #chatTitle {
 	float:left;
 	width:70px;
@@ -9,13 +16,13 @@
 	padding-right:7px;
 	padding-top:3px;
 	font-size: 8pt;
-	text-align: right; 
+	text-align: right;
 }
 
 #chatControl:hover {
 	text-decoration:underline;
 	cursor:pointer;
-} 
+}
 
 #chatBuddyBar {
 	position:fixed;
@@ -24,7 +31,7 @@
 	border-color:#c2c7c4;
 	background-image:url("puthere.png");
 	background-repeat:no-repeat;
-	background-position:center; 
+	background-position:center;
 	bottom:0px;
 	right:212px;
 	width:100%;
@@ -35,7 +42,7 @@
 	margin-top:-264px;
 	left:0px !important;
 	top:0px !important;
-	z-index:200 !important;  
+	z-index:200 !important;
 	position:relative !important;
 }
 
@@ -49,16 +56,16 @@
 	position:fixed;
 	bottom:0px;
 	right:217px;
-	list-style-type: none; 
+	list-style-type: none;
 }
 
 #chatBuddyBar > ul > li {
 	display: inline;
 	width:330px !important;
 	margin-right:10px;
-	margin-left:10px; 
-}  
- 
+	margin-left:10px;
+}
+
 .glowing {
 	background-color:#fcfe96;
 	border-color:#fca749 !important;
@@ -69,7 +76,7 @@
 }
 
 .chatBuddy {
-	cursor:pointer; 
+	cursor:pointer;
 }
 
 .newMessage {
@@ -98,7 +105,7 @@
 	height:400px !important;
 	border:1px solid;
 }
-.minimized { 
+.minimized {
 	width:330px;
 	height: 34px !important;
 	border: 1px solid;
@@ -122,11 +129,11 @@
 .chatContent {
 	background-color:#ffffff;
 	height:300px;
-	font-size:10pt; 
+	font-size:10pt;
 	border-bottom:1px solid;
 }
 .chatSending {
-	height:68px !important; 
+	height:68px !important;
 }
 .chatButton {
 	margin:0px;
@@ -155,7 +162,7 @@
 	width:200px;
 	list-style-type: none;
 	background-color:#ffffff;
-	font-size:9pt; 
+	font-size:9pt;
 	color:#000000;
 	margin:0px;
 	padding:0px;
@@ -165,7 +172,7 @@
 .chatList > li {
 	height:20px;
 	padding-top:4px;
-	padding-left:3px; 
+	padding-left:3px;
 }
 .chatList > li:hover {
 	background-color:#fbfcb8;
