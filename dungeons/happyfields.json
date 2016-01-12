@@ -29,12 +29,6 @@
       "y": 35
     },
     {
-      "type": "message",
-      "message": "Actually, monster aren't implemented yet.\nAnd neather is health.\nTODO: Implement death",
-      "x": 18,
-      "y": 35
-    },
-    {
       "type": "exit",
       "toDungeon": "origin",
       "number": 1,

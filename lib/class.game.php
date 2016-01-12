@@ -9,6 +9,9 @@ class Game implements JsonSerializable {
 
   public function move($direction) {
     $action_log = array();
+
+    $this->checkDeathMessage($action_log);
+
     $action_log[] = $this->moveWithoutEntityCheck($direction);
 
     foreach ($this->getEntities($this->stats->x, $this->stats->y) as $entity) {
@@ -105,7 +108,7 @@ class Game implements JsonSerializable {
     );
     $action_log[] = $battle_entry;
     if ($user->currHp == 0)
-      $action_log[] = array("action" => "message", "message" => "You are lucky i didn't implement death yet..");
+      $this->killPlayer($action_log);
   }
 
   public function exitDungeon($entity) {
@@ -114,6 +117,22 @@ class Game implements JsonSerializable {
       Game::newGame($entity->toDungeon, $entity->number);
     else {
       Game::newGame($entity->toDungeon);
+    }
+  }
+
+  public function killPlayer(&$action_log) {
+    $action_log[] = array("action" => "message", "message" => "Your vision becomes blurry..");
+    $action_log[] = array("action" => "message", "message" => "A suspicious looking fairy picks you up and puts you in a even more suspicious looking van.");
+    $_SESSION["user"]->json_data["just_died"] = true;
+    $_SESSION["user"]->save();
+    $this->delete();
+    $action_log[] = array("action" => "refreshBrowser");
+  }
+  public function checkDeathMessage(&$action_log) {
+    if (isset($_SESSION["user"]->json_data["just_died"])) {
+      $action_log[] = array("action" => "message", "message" => "You wake up in the fairy forest. Your butt kinda hurts..");
+      unset($_SESSION["user"]->json_data["just_died"]);
+      $_SESSION["user"]->save();
     }
   }
 
