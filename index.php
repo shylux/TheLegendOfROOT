@@ -69,6 +69,6 @@
 		<div id="authors">
 		  created by: <a href="http://github.com/tanns2" rel="author">Stefan Ägidius Tanner</a> &amp; <a href="http://shylux.ch" rel="author">Lukas "Knöp the Möb" Knöpfel</a>
 		</div>
-	</footer>
+	</footer> 
 </body>
 </html>

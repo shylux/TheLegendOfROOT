@@ -3,11 +3,30 @@ const MASTERTABLE    = 'sqlite_master';
 const SEQUENCETABLE  = 'sqlite_sequence';
 const PAGESTABLE     = 'pages';
 class SQLITE extends SQLite3 {
+ 
   private $protectedTables = array(
     MASTERTABLE,
     SEQUENCETABLE,
     PAGESTABLE
-  );
+  ); 
+  public function isJson( $string )
+  {
+     json_decode($string);
+	 return (json_last_error() == JSON_ERROR_NONE);
+  }
+  public function escape( $param )
+  {
+     $param = str_replace("DROP", "", $param);
+     $param = str_replace("'", "", $param);
+     $param = str_replace("\"", "", $param);
+     $param = str_replace("\\", "", $param);
+     $param = str_replace("/", "", $param);
+     $param = str_replace(";", "", $param);
+     $param = str_replace("`", "", $param);
+     $param = str_replace(":", "", $param);
+
+	 return $param;
+  }
   public function emptyDatabase( $exclude = array() )
   {
     $forbiddenTables = $this->protectedTables;
@@ -112,7 +131,7 @@ class SQLITE extends SQLite3 {
     $preparedData = $this->helperCondition($data);
     foreach ( $preparedData as $value )
     {
-      $condition[] = $value;
+      $condition[] = $value ; 
     }
     return $condition;
   }
@@ -121,7 +140,7 @@ class SQLITE extends SQLite3 {
     $preparedData = $this->helperCondition($data);
     foreach ( $preparedData as $key => $value )
     {
-      $condition[] = "`{$key}` = {$value}";
+      $condition[] = "`{$key}` = {$value}"; 
     }
     return $condition;
   }
@@ -129,6 +148,9 @@ class SQLITE extends SQLite3 {
   {
     foreach ( $data as $key => $value )
     {
+
+	  $value = ( $this->isJson($value) ) ? $value : $this->escape($value) ;
+
       switch ( gettype($value) )
       {
         case 'boolean':
