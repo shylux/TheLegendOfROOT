@@ -27,9 +27,8 @@
   <header>
     <h1><a href="/">The Legend of ROOT</a></h1>
     <nav>
-      <a href="/game">Dungeons</a></li>
 		<?php if ( isLoggedIn() ): ?>
-			<a href="/character"><?php echo $_SESSION["user"]->name ?></a>
+      <a href="/game">Dungeons</a>
 		<?php endif; ?>
     </nav>
 
@@ -49,7 +48,7 @@
 
   </header>
 	<div id="content">
-	<?php include_once( ( !isset($_GET['include']) ) ? 'welcome.php' : "{$_GET['include']}" ); ?>
+	<?php include_once( ( !isset($_GET['include']) ) ? 'register.php' : "{$_GET['include']}" ); ?>
 	</div>
 	<footer>
 		<div id="authors">
