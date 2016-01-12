@@ -48,7 +48,17 @@
 
   </header>
 	<div id="content">
-	<?php include_once( ( !isset($_GET['include']) ) ? 'register.php' : "{$_GET['include']}" ); ?>
+	<?php
+    if (!isset($_GET['include'])) {
+      if (isLoggedIn()) {
+        include_once('game.php');
+      } else {
+        include_once('register.php');
+      }
+    } else {
+      include_once($_GET['include']);
+    }
+  ?>
 	</div>
 	<footer>
 		<div id="authors">

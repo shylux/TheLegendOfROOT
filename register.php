@@ -1,16 +1,17 @@
-<?php 
+<?php
 
-if (require_params("username", "email", "password", "class") && Captcha::validate($_POST)) { 
+if (require_params("username", "email", "password", "class") && Captcha::validate($_POST)) {
 
   $user = User::create($_REQUEST["username"], $_REQUEST["email"], $_REQUEST["password"], $_REQUEST["class"]);
 
   if ($user) {
     $_SESSION["user"] = $user;
+    ?><script type="text/javascript">window.location="/game";</script><?php
   }
 }
 
 $captcha = new Captcha();
-$captcha->generateCaptcha(); 
+$captcha->generateCaptcha();
 
 ?>
 
@@ -40,18 +41,15 @@ $captcha->generateCaptcha();
 	<td><label for="password">Password</label></td>
 	<td><input id="password" name="password" type="password" placeholder="Password" /></td>
   </tr>
-  <tr> 
-	<td colspan="2"><?php echo $captcha->getFormInfo(); ?></td> 
+  <tr>
+	<td colspan="2"><?php echo $captcha->getFormInfo(); ?></td>
   </tr>
   <tr>
 	<td><?php echo $captcha->getImage(); ?></td>
 	<td><?php echo $captcha->getForm(); ?></td>
-   </tr> 
-  <tr> 
-	<td colspan="2"><input type="submit" value="Register" /></td> 
+   </tr>
+  <tr>
+	<td colspan="2"><input type="submit" value="Register" /></td>
   </tr>
-  </table> 
+  </table>
 </form>
-
-
-  
