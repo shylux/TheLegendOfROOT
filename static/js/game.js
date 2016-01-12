@@ -13,6 +13,8 @@ TLOR.setup = function(jq_element, initial_dungeon_data) {
   TLOR = $.extend(TLOR, initial_dungeon_data);
 
   TLOR.el.append($('<audio autoplay loop /><a href="javascript:TLOR.toggleSound()">Toggle sound</a>'));
+  if (Cookies.get('muted') && Cookies.get('muted') == "true")
+    TLOR.el.find('audio').get(0).muted = (Cookies.get('muted') == "true");
   TLOR.setSound();
 
   TLOR.el.append('<table cellspacing="0"><tbody></tbody></table>');
@@ -224,7 +226,10 @@ TLOR.setSound = function(sound) {
   audio.attr('src', sprintf("/static/sound/%s", sound));
 }
 TLOR.toggleSound = function() {
-  TLOR.el.find('audio').get(0).muted = ! TLOR.el.find('audio').get(0).muted;
+  var audio = TLOR.el.find('audio').get(0)
+  var newState = ! audio.muted;
+  audio.muted = newState;
+  Cookies.set('muted', newState);
 }
 
 fight_html = `
