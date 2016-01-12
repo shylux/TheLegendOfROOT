@@ -29,7 +29,6 @@
       "name": "Steffan",
       "entranceText": "Hei, knöpp de möp.",
       "exitText": "Tschau du sau!",
-      "class": 0,
       "att": 4,
       "def": 5,
       "hp": 6,

@@ -1,16 +1,9 @@
 <?php
 
-abstract class Klass {
-  const Developer = 0;
-  const Supporter = 1;
-  const Admin = 2;
-}
-
 class User {
   public $name;
   public $email;
   public $pass_hash;
-  public $class;
   public $xp = 0;
   public $att = 0;
   public $def = 0;
@@ -69,14 +62,13 @@ class User {
     $this->save();
   }
 
-  public static function create($username, $email, $password, $class) {
+  public static function create($username, $email, $password) {
     if ($GLOBALS["db"]->exists("users", array("name"), array("name" => $username)))
       return false;
     $GLOBALS["db"]->insert("users",
                 array("name" => $username,
                       "email" => $email,
                       "pass_hash" => salt_hash($password),
-                      "class" => $class,
                       "json_data" => json_encode(array())));
     return User::load($username);
   }

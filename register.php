@@ -1,8 +1,8 @@
 <?php
 
-if (require_params("username", "email", "password", "class") && Captcha::validate($_POST)) {
+if (require_params("username", "email", "password") && Captcha::validate($_POST)) {
 
-  $user = User::create($_REQUEST["username"], $_REQUEST["email"], $_REQUEST["password"], $_REQUEST["class"]);
+  $user = User::create($_REQUEST["username"], $_REQUEST["email"], $_REQUEST["password"]);
 
   if ($user) {
     $_SESSION["user"] = $user;
@@ -22,16 +22,6 @@ $captcha->generateCaptcha();
   <tr>
 	<td><label for="username">Username</label></td>
 	<td><input id="username" name="username" type="text" placeholder="Username" /></td>
-  </tr>
-  <tr>
-	<td><label for="class">Class</label></td>
-	<td>
-		<div>
-			<label for="dev">Developer</label><input id="dev" type="radio" name="class" value="0">
-			<label for="sup">Supporter</label><input id="sup" type="radio" name="class" value="1">
-			<label for="adm">Admin</label><input id="adm" type="radio" name="class" value="2">
-		</div>
-	</td>
   </tr>
   <tr>
 	<td><label for="email">Email</label></td>
