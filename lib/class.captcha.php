@@ -1,5 +1,5 @@
-<?php 
-// Not completley done yet, but it works already.
+<?php  
+
 class Captcha
 {
 
@@ -13,24 +13,26 @@ class Captcha
 	private $minBackgroundColorValue = 200;
 	private $maxBackgroundColorValue = 255;
 	private $captchaInfoText = "";
-	private $captchaOriginProperty = "captchaOrigin";
-	private $getCaptchaProperty = "captcha";
+	public static $captchaOriginProperty = "captchaOrigin";
+	public static $getCaptchaProperty = "captcha";
+	public static $captchaProperty = "captcha";
 	private $fileName = "";
+	private $filePath = "captcha/";
+	private static $captchaPath = "captcha/";
 
 	public function __construct( $alternativeInfoText = "captcha.info" )
 	{
-		$this->captchaInfoText = "Subtrahieren Sie von jeder Zahl eines und tragen sie sie in das texfeld ein";
-		// load from configuration object to the captcha properties: TODO
+		$this->captchaInfoText = "Subtrahieren Sie von jeder Zahl eines und tragen sie sie in das texfeld ein"; 
 	}
 
-	public function getCaptchaOriginProperty(  )
+	public static function getCaptchaOriginProperty(  )
 	{
-		return $this->captchaOriginProperty;
+		return self::$captchaOriginProperty;
 	}
 
-	public function getCaptchaProperty(  )
+	public static function getCaptchaProperty(  )
 	{
-		return $this->getCaptchaProperty;
+		return self::$getCaptchaProperty;
 	}
 
 	public function generateCaptcha( )
@@ -52,30 +54,45 @@ class Captcha
 		$this->saveCaptcha($captchaNumbers);
 	}
 
-	public function validate( $captchaFileName, $enteredCaptcha )
-	{
+	public static function validate( $data )
+	{  
+		$captchaFileName = $data[self::getCaptchaOriginProperty()];
+		$enteredCaptcha  = $data[self::getCaptchaProperty()]; 
+
 		if ( $captchaFileName == "" || $enteredCaptcha == "" )
 		{
 			return false;
 		}
 		
-		$originalNumbers = explode("_", $captchaFileName)[1];
-		$originalNumbers = explode(".", $originalNumbers)[0];
-		
-		$parsedCaptcha = "";
+		$pathToCaptcha = scandir(self::$captchaPath);
 
-		for ( $i = 0; $i < strlen($originalNumbers); $i++ )
-		{
-			$parsedCaptcha .= "" . ((int)substr($originalNumbers, $i, 1))-1; 
+		for ( $i = 0; $i < count($pathToCaptcha); $i++ ) {
+			if ( strlen($pathToCaptcha[$i]) > 3 ) {
+				unlink(self::$captchaPath . "/" . $pathToCaptcha[$i]);
+			}
 		}
 
-		return $parsedCaptcha == $enteredCaptcha;
+		$originalNumbers = explode("_", $captchaFileName)[1];
+		$originalNumbers = explode(".", $originalNumbers)[0]; 
+
+		return $originalNumbers == $enteredCaptcha;
 	}
 
-	public function getForm( )
+	public function getForm()
 	{
-		$html = "<div>{$this->captchaInfoText}</div><img src='{$this->fileName}' style='width:{$this->width}px;height:{$this->height}px;'><input type='text' name='{$this->captchaProperty}' id='{$this->captchaProperty}'><input type='hidden' value='{$this->fileName}' name='{$this->captchaOriginProperty}' id='{$this->captchaOriginProperty}'>";
-		echo "abc";
+		$html = "<input type='text' name='" . self::getCaptchaProperty() . "' id='" . self::getCaptchaProperty() . "'><input type='hidden' value='$this->fileName' name='" . self::getCaptchaOriginProperty() . "' id='" . self::getCaptchaOriginProperty() . "'>";
+		return $html;
+	}	
+
+	public function getFormInfo()
+	{
+		$html = "<pre>{$this->captchaInfoText}</pre>";
+		return $html;
+	}	
+
+	public function getImage()
+	{
+		$html = "<img src='{$this->fileName}' style='width:{$this->width}px;height:{$this->height}px;'>";
 		return $html;
 	}	
 
@@ -87,7 +104,7 @@ class Captcha
 		ob_end_clean();
 		 
 		imagedestroy($this->captchaImage);
-		$this->fileName = time() . "_{$captchaNumbers}.jpg";		
+		$this->fileName = $this->filePath . time() . "_{$captchaNumbers}.jpg";		
 
 		$fh = fopen($this->fileName, "w" );
 		fwrite( $fh, $contents );
