@@ -6,19 +6,27 @@
   <meta charset="utf-8">
   <meta name="author" content="Stefan Tanner &amp; Lukas Knöpfel">
   <link rel="shortcut icon" type="image/x-icon" href="static/img/favicon.ico">
-  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/style.css"> 
   <script src="static/js/jquery.js"></script>
   <script src="static/js/sprintf.min.js"></script>
   <script src="static/js/json2.js"></script>
-  <script src="static/js/game.js"></script>
-  <style>
-	#chatPrison {
-		margin-left:200px !important; 
+  <script src="static/js/game.js"></script> 
+
+  <?php if ( isLoggedIn() && strpos($_SERVER['REQUEST_URI'], 'game') > 0 ): ?>
+	<link rel="stylesheet" type="text/css" href="static/css/chat.css">
+	<script src="static/js/jquery-ui/jquery-ui.js"></script> 
+	<script src="static/js/chat.js"></script> 
+  <?php endif; ?>
+
+  <style> 
+	html, body {
+		height:auto;
 	}
   </style>
+
 </head>
-<body>
- <?php if ( isLoggedIn() ): ?>
+<body> 
+ <?php if ( isLoggedIn() && strpos($_SERVER['REQUEST_URI'], 'game') > 0 ): ?>
 		<?php include("chat/chatstructure.php"); ?>
  <?php endif; ?>
   <header>
@@ -55,7 +63,7 @@
 	</div>
 	<footer>
 		<div id="authors">
-		  created by: <a href="#TODO" rel="author">Stefan Ägidius Tanner</a> &amp; <a href="http://shylux.ch" rel="author">Lukas "Knöp the Möb" Knöpfel</a>
+		  created by: <a href="http://github.com/tanns2" rel="author">Stefan Ägidius Tanner</a> &amp; <a href="http://shylux.ch" rel="author">Lukas "Knöp the Möb" Knöpfel</a>
 		</div>
 	</footer>
 </body>
