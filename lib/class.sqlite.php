@@ -1,32 +1,27 @@
 <?php
+
 const MASTERTABLE    = 'sqlite_master';
 const SEQUENCETABLE  = 'sqlite_sequence';
 const PAGESTABLE     = 'pages';
-class SQLITE extends SQLite3 {
- 
+
+class SQLITE extends SQLite3 { 
+
   private $protectedTables = array(
     MASTERTABLE,
     SEQUENCETABLE,
     PAGESTABLE
-  ); 
-  public function isJson( $string )
-  {
-     json_decode($string);
-	 return (json_last_error() == JSON_ERROR_NONE);
-  }
-  public function escape( $param )
-  {
-     $param = str_replace("DROP", "", $param);
-     $param = str_replace("'", "", $param);
-     $param = str_replace("\"", "", $param);
-     $param = str_replace("\\", "", $param);
-     $param = str_replace("/", "", $param);
-     $param = str_replace(";", "", $param);
-     $param = str_replace("`", "", $param);
-     $param = str_replace(":", "", $param);
+  );  
 
-	 return $param;
-  }
+  private function queryPreparation($preparing, $values) {  
+    $i = 1;
+    foreach ( $values as $value )
+    {
+        $preparing->bindValue($i, $value);
+        $i++;
+    }
+    return $preparing;
+  }  
+
   public function emptyDatabase( $exclude = array() )
   {
     $forbiddenTables = $this->protectedTables;
@@ -40,23 +35,41 @@ class SQLITE extends SQLite3 {
       }
     }
   }
+
   public function __construct( $filename )
   {
     $this->open($filename);
   }
-    public function hasTable( $tablename )
+
+  public function hasTable( $tablename )
   {
     return $this->query('SELECT * FROM ' . MASTERTABLE . ' WHERE type="table" and name="' . $tablename . '"')->fetchArray();
   }
+
   public function amount( $table, $desired, $where = false )
   {
     if ( count($desired) !== 1 || !is_string($table) || !is_array($desired) || ( !$this->hasTable($table) && $table !== MASTERTABLE ) ){
       return false;
     }
+    $condition = $this->buildUpdateCondition($where)['condition'];
     $sql = "SELECT COUNT (" . $desired[0] . ") FROM '{$table}'";
-    $sql .= ( $where === false ) ? '' : " WHERE " . implode(' AND ', $this->buildUpdateCondition($where)) ;
-    return parent::querySingle($sql);
+    $sql .= ( $where === false ) ? '' : " WHERE " . implode(' AND ', $condition) ;
+
+    if ( $where !== false ) {
+        $preparing = $this->queryPreparation(parent::prepare($sql), $this->buildUpdateCondition($where)['values']);
+    }
+    else {
+        $preparing = parent::prepare($sql);
+    } 
+
+    $result = $preparing->execute();
+    while($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        return array_values($row)[0]; 
+    }
+     
+    return 0;  
   }
+
   public function exists( $table, $desired, $where = false ) {
     $amount = $this->amount( $table, $desired, $where );
     return ($amount > 0);
@@ -68,10 +81,20 @@ class SQLITE extends SQLite3 {
       return false;
     }
     $sql = "SELECT * FROM '{$table}'";
-    $sql .= ( $where === false ) ? '' : " WHERE " . implode(' AND ', $this->buildUpdateCondition($where)) ;
-    $result = parent::query($sql);
-    while($row = $result->fetchArray(SQLITE3_ASSOC))
+    $condition = $this->buildUpdateCondition($where)['condition'];
+    $sql .= ( $where === false ) ? '' : " WHERE " . implode(' AND ', $condition) ;  
+
+    if ( $where !== false ) {
+        $preparing = $this->queryPreparation(parent::prepare($sql), $this->buildUpdateCondition($where)['values']);
+    }
+    else {
+        $preparing = parent::prepare($sql);
+    } 
+
+    $result = $preparing->execute();
+    while($row = $result->fetchArray(SQLITE3_ASSOC)) {
       $resultData[] = $row;
+	}
     return $resultData;
   }
 
@@ -81,8 +104,17 @@ class SQLITE extends SQLite3 {
       return false;
     }
     $sql = "SELECT " . implode(",", $desired) . " FROM '{$table}'";
-    $sql .= ( $where === false ) ? '' : " WHERE " . implode(' AND ', $this->buildUpdateCondition($where)) ;
-    $result = parent::query($sql);
+    $condition = $this->buildUpdateCondition($where)['condition'];
+    $sql .= ( $where === false ) ? '' : " WHERE " . implode(' AND ', $condition) ;
+
+    if ( $where !== false ) { 
+        $preparing = $this->queryPreparation(parent::prepare($sql), $this->buildUpdateCondition($where)['values']);
+    } 
+    else {
+        $preparing = parent::prepare($sql);
+    } 
+
+    $result = $preparing->execute();
     $resultData = array();
     while($row = $result->fetchArray(SQLITE3_ASSOC))
     {
@@ -96,6 +128,7 @@ class SQLITE extends SQLite3 {
     }
     return $resultData;
   }
+
   public function insert( $table, $data )
   {
     if (is_object($data)) $data = (array)$data;
@@ -104,73 +137,73 @@ class SQLITE extends SQLite3 {
     }
     $data = $this->filterColumns($table, $data);
     $fields = array_keys($data);
-    $sql = "INSERT INTO '{$table}' ('" . implode("','", $fields) . "') VALUES (" . implode(",", $this->buildInsertCondition($data)) . ")";
-    parent::query($sql);
+    $condition = $this->buildInsertCondition($data)['condition'];
+    $sql = "INSERT INTO '{$table}' ('" . implode("','", $fields) . "') VALUES (" . implode(",", $condition) . ")";
+ 
+    $preparing = $this->queryPreparation(parent::prepare($sql), $this->buildInsertCondition($data)['values']); 
+
+	$preparing->execute(); 
+
     return parent::lastInsertRowid();
   }
+
   public function remove( $table, $where )
   {
     if ( !is_string($table) || !is_array($where) || count($where) === 0 )
     {
       return false;
     }
-    $sql = "DELETE FROM '{$table}' WHERE " . implode(' AND ', $this->buildUpdateCondition($where));
-    return ( parent::query($sql) ) ? true : false ;
+    $condition = $this->buildUpdateCondition($where)['condition'];
+    $sql = "DELETE FROM '{$table}' WHERE " . implode(' AND ', $condition);
+
+    $preparing = $this->queryPreparation(parent::prepare($sql), $this->buildUpdateCondition($where)['values']);
+
+    return ( $preparing->execute() ) ? true : false ;
   }
+
   public function update( $table, $data, $where )
   {
     if (is_object($data)) $data = (array)$data;
     if ( !is_string($table) || !is_array($data) || !is_array($where) ) return false;
     $data = $this->filterColumns($table, $data);
 
-    $sql = "UPDATE '{$table}' SET " . implode(', ', $this->buildUpdateCondition($data)) . " WHERE " . implode(' AND ', $this->buildUpdateCondition($where));
-    return parent::query($sql);
+    $condition = $this->buildUpdateCondition($where)['condition'];
+    $dataCondition = $this->buildUpdateCondition($data)['condition'];
+
+    $sql = "UPDATE '{$table}' SET " . implode(', ', $dataCondition) . " WHERE " . implode(' AND ', $condition); 
+    $preparing = $this->queryPreparation(parent::prepare($sql), array_merge($this->buildUpdateCondition($data)['values'], $this->buildUpdateCondition($where)['values']));  
+	$preparing->execute();
+ 
+    return true;
   }
+
   private function buildInsertCondition( $data )
   {
-    $preparedData = $this->helperCondition($data);
+    if ( $data === false ) return; 
+    $preparedData = $data;
+    $values = array();
     foreach ( $preparedData as $value )
     {
-      $condition[] = $value ; 
+         $condition[] = "?";
+         $values[] = $value;
     }
-    return $condition;
+    return array('condition' => $condition, 'values' => $values);
   }
+
   private function buildUpdateCondition( $data )
   {
-    $preparedData = $this->helperCondition($data);
+    if ( $data === false ) return; 
+    $preparedData = $data;
+    $values = array(); 
+
     foreach ( $preparedData as $key => $value )
-    {
-      $condition[] = "`{$key}` = {$value}"; 
+    { 
+         $condition[] = "`{$key}` = ?";
+         $values[] = $value;
     }
-    return $condition;
+    return array('condition' => $condition, 'values' => $values);
   }
-  private function helperCondition( $data )
-  {
-    foreach ( $data as $key => $value )
-    {
-
-	  $value = ( $this->isJson($value) ) ? $value : $this->escape($value) ;
-
-      switch ( gettype($value) )
-      {
-        case 'boolean':
-        case 'NULL':
-          $value = 'NULL';
-          break;
-        case 'string':
-          $value = "'" . parent::escapeString($value) . "'";
-          break;
-        case 'double':
-        case 'integer':
-          $value = $value;
-          break;
-        default:
-          $value = "'" . parent::escapeString($value) . "'";
-      }
-      $preparedData[$key] = $value;
-    }
-    return $preparedData;
-  }
+  
   private function filterColumns( $table_name, $data ) {
     $tablesquery = parent::query(sprintf("PRAGMA table_info(%s);", $table_name));
     $column_names = array();

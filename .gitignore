@@ -1,7 +1,8 @@
 *.db
 *.data
 logs/*
-!logs/.gitkeep
+debug/*
+logs/.gitkeep
 *.sqlite
 captcha/*
 !captcha/.gitkeep
