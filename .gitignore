@@ -1,6 +1,7 @@
 *.db
 *.data
 logs/*
+debug/*
 !logs/.gitkeep
 *.sqlite
 captcha/*
