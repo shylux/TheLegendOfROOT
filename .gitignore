@@ -2,7 +2,7 @@
 *.data
 logs/*
 debug/*
-logs/.gitkeep
+!logs/.gitkeep
 *.sqlite
 captcha/*
 !captcha/.gitkeep
