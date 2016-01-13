@@ -98,6 +98,7 @@ function getMessages() {
 }
 
 function sendMessage( $chatId, $message, $sender, $reciever ) {
+	$message = htmlspecialchars($message);
 	setChatContacts($sender, $reciever);
 	$messages = getMessages(); 
 	$messages[$chatId][] = array('t' => date("H:i:s", time()), 'm' => $message);

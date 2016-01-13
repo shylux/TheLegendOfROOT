@@ -12,23 +12,14 @@
   <script src="static/js/js.cookie.js"></script>
   <script src="static/js/helpers.js"></script>
   <script src="static/js/json2.js"></script>
-  <script src="static/js/game.js"></script>
-
-  <?php if ( False && isLoggedIn() && strpos($_SERVER['REQUEST_URI'], 'game') > 0 ): ?>
-	<script src="static/js/jquery-ui/jquery-ui.js"></script>
-	<script src="static/js/chat.js"></script>
-  <?php endif; ?>
-
+  <script src="static/js/game.js"></script>  
 </head>
-<body>
- <?php if ( False && isLoggedIn() && strpos($_SERVER['REQUEST_URI'], 'game') > 0 ): ?>
-		<?php include("chat/chatstructure.php"); ?>
- <?php endif; ?>
+<body> 
   <header>
     <h1><a href="/">The Legend of ROOT</a></h1>
     <nav>
 		<?php if ( isLoggedIn() ): ?>
-      <a href="/game">Dungeons</a>
+      <a href="/game">Dungeons</a> 
 		<?php endif; ?>
     </nav>
 
@@ -44,8 +35,7 @@
       </form>
       <?php } ?>
     </div>
-
-
+ 
   </header>
 	<div id="content">
 	<?php
