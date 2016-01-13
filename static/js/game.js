@@ -78,7 +78,7 @@ TLOR.generateTerrainJSON = function() {
   return JSON.stringify(terr);
 };
 TLOR.isHidden = function(entity) {
-  if (["message", "monster"].indexOf(entity.type) > -1) return true;
+  if (["message"].indexOf(entity.type) > -1) return true;
   if (TLOR.getTerrainFor(entity.x, entity.y) == TERRAIN.TALL_GRASS) return true;
   return false;
 };
@@ -144,7 +144,7 @@ TLOR.play = function() {
     $.getJSON('api.php', {id:TLOR.id, action: action}, TLOR.handleActions);
   });
 
-  $(document).ajaxStart(function() { 
+  $(document).ajaxStart(function() {
 	// TLOR.requestInProgress = true;
 	// Issue with the chat, if it's open this will never be finish -> player isn't able to walk around
   });

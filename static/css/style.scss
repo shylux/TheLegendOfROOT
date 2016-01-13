@@ -134,6 +134,9 @@ footer #authors {
           @include sprite(move);
           @include rotation();
         }
+        &.monster {
+          @include sprite(monster);
+        }
 
       }
     }
