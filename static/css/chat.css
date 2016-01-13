@@ -1,5 +1,11 @@
-#chatPrison {
-	margin-left:200px !important;
+#chatPrison { 
+	margin-top:10px;
+	margin-left: 0px !important; 
+	height:100%;
+	width:100%;
+	position:fixed;
+	left:0px;
+	top:0px;
 }
 html, body {
 	height:auto;

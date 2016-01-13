@@ -56,9 +56,9 @@ function startListening() {
 					setDefaultPosition($("#chatWindow" + target)); 
 		
 					if ( !$("#chatWindow" + target).hasClass('ui-draggable') ) { 
-						$("#chatWindow" + target).draggable({ containment: "body", scroll: false });
+						$("#chatWindow" + target).draggable({ containment: "#chatPrison", scroll: false });
 						$("#chatWindow" + target).on("dragstop",function(ev,ui){
-							saveCoordinates();
+							//saveCoordinates();
 						});
 					}
  
@@ -84,9 +84,9 @@ function restoreCoordinates() {
 	$(".chatwindow").each(function() {  
 
 		
-		$(this).draggable({ containment: "body", scroll: false });
+		$(this).draggable({ containment: "#chatPrison", scroll: false });
 		$(this).on("dragstop",function(ev,ui){
-			saveCoordinates();
+			//saveCoordinates();
 		});
 
 		var settings = coordinatesData[$(this).attr('data-chatId')];
@@ -193,7 +193,7 @@ function putToChatBar( $chatBuddy ) {
  
 	}
 
-	saveCoordinates();
+	//saveCoordinates();
 
 }
 
@@ -224,9 +224,9 @@ function removeFromChatBar( $chatBuddy ) {
 	setDefaultPosition($("#chatWindow" + chatBuddyFromBar));
  
 	$("#chatWindow" + chatBuddyFromBar).removeClass("ui-draggable ui-draggable-handle ui-draggable-dragging"); 
-	$("#chatWindow" + chatBuddyFromBar).draggable({ containment: "body", scroll: false });
+	$("#chatWindow" + chatBuddyFromBar).draggable({ containment: "#chatPrison", scroll: false });
 
-	saveCoordinates();
+	// saveCoordinates();
 }
 
 
@@ -291,7 +291,9 @@ function sendMessage() {
 
 $( document ).ready(function() {
 	
-	restoreCoordinates();
+	$("header, footer").toggle(false);
+
+	//restoreCoordinates();
 	startListening();
 
 	$("#chatControl").click(function() {
@@ -348,7 +350,6 @@ $( document ).ready(function() {
 	$(".chatUndock").click(function() { 
 		removeFromChatBar($(this));
 	});
- 
 
 	$(".chatBuddy").click(function() {
 		var positions = getPositions();
@@ -356,9 +357,9 @@ $( document ).ready(function() {
 		$("#chatWindow" + $(this).attr('data-chatId')).toggle(true);
 		
 		if ( !$("#chatWindow" + $(this).attr('data-chatId')).hasClass('ui-draggable') ) { 
-			$("#chatWindow" + $(this).attr('data-chatId')).draggable({ containment: "body", scroll: false });
+			$("#chatWindow" + $(this).attr('data-chatId')).draggable({ containment: "#chatPrison", scroll: false });
 			$("#chatWindow" + $(this).attr('data-chatId')).on("dragstop",function(ev,ui){
-				saveCoordinates();
+				// saveCoordinates();
 			});
 		}
 		
@@ -373,7 +374,7 @@ $( document ).ready(function() {
 		$("#chatWindow" + $(this).attr('data-chatId')).toggle(false);
 		
 		setPositions(positions); 
-		saveCoordinates();
+		// saveCoordinates();
 	});
 
 	$(".chatwindow").mousedown(function() {
