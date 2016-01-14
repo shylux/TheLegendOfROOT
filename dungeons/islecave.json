@@ -1,0 +1,87 @@
+{
+  "name": "islecave",
+  "sound": "inside_cave.mp3",
+  "width": 10,
+  "height": 10,
+  "terrain": [[13,13,16,16,13,16,16,16,13,13],[13,16,16,13,13,13,13,16,16,16],[13,13,16,13,16,16,13,16,13,16],[13,13,16,16,16,16,16,16,13,16],[16,16,16,16,13,16,13,16,13,16],[13,13,13,16,13,16,13,16,13,16],[16,16,16,16,16,16,13,16,16,16],[16,13,13,13,13,13,13,16,13,13],[16,16,16,16,16,16,16,16,16,16],[13,13,13,13,13,13,16,13,13,16]],
+  "entities": [
+    {
+      "type": "entrance",
+      "number": 1,
+      "x": 9,
+      "y": 9
+    },
+    {
+      "type": "entrance",
+      "number": 2,
+      "x": 0,
+      "y": 4
+    },
+    {
+      "type": "exit",
+      "toDungeon": "isle",
+      "number": 3,
+      "x": 0,
+      "y": 4
+    },
+    {
+      "type": "exit",
+      "toDungeon": "isle",
+      "number": 2,
+      "x": 9,
+      "y": 9
+    },
+    {
+      "type": "monster",
+      "name": "islemonster",
+      "entranceText": "A stranger! Strangers are normally being killt!",
+      "exitText": "You had only luck",
+      "class": 0,
+      "att": 1,
+      "def": 1,
+      "hp": 10,
+      "x": 4,
+      "y": 3,
+      "hidden": false
+    },
+    {
+      "type": "monster",
+      "name": "islemonster",
+      "entranceText": "How did you come in here?",
+      "exitText": "AAARGH!",
+      "class": 0,
+      "att": 1,
+      "def": 1,
+      "hp": 10,
+      "x": 7,
+      "y": 4,
+      "hidden": false
+    },
+    {
+      "type": "monster",
+      "name": "islemonster",
+      "entranceText": "Away, away!",
+      "exitText": "I will go away instead",
+      "class": 0,
+      "att": 15,
+      "def": 2,
+      "hp": 2,
+      "x": 3,
+      "y": 6,
+      "hidden": false
+    },
+    {
+      "type": "monster",
+      "name": "islemonster",
+      "entranceText": "Oh I see! You want the treasure!",
+      "exitText": "NOOO!",
+      "class": 0,
+      "att": 1,
+      "def": 7,
+      "hp": 11,
+      "x": 1,
+      "y": 1,
+      "hidden": false
+    }
+  ]
+}

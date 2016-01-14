@@ -23,6 +23,12 @@
       "y": 3
     },
     {
+      "type": "entrance",
+      "number": 4,
+      "x": 0,
+      "y": 9
+    },
+    {
       "type": "message",
       "message": "Welcome to the Happy Fields where everything is fluffy and nothing will kill you.",
       "x": 18,
@@ -48,6 +54,13 @@
       "number": 2,
       "x": 38,
       "y": 2
+    },
+    {
+      "type": "exit",
+      "toDungeon": "isle",
+      "number": 1,
+      "x": 0,
+      "y": 9
     }
   ]
 }
