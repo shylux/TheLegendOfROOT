@@ -1,8 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Russo+One);
 html, body {
   margin: 0;
   padding: 0;
   background-color: #888;
-  width: 100%; }
+  width: 100%;
+  font-family: 'Russo One', sans-serif; }
 
 body {
   width: 800px;

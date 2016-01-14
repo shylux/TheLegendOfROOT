@@ -1,4 +1,5 @@
 @import "terrain";
+@import url(https://fonts.googleapis.com/css?family=Russo+One);
 
 $sitewidth: 800px;
 @mixin sprite($name) {
@@ -40,6 +41,7 @@ html, body {
   padding: 0;
   background-color: #888;
   width: 100%;
+  font-family: 'Russo One', sans-serif;
 }
 
 body {
