@@ -28,7 +28,7 @@
     <span>Y: <code id="pos-y"></code></span>
   </div>
   <div id="terrain-select" class="game-tile">
-    <div><b>Available Terrains</b> Hold <code>ctrl</code> and click to fill rects.</div>
+    <div><b>Available Terrains</b> Hold <code>shift</code> and click to fill rects.</div>
     <table>
       <tr>
         <?php for ($i = 0; $i <= 18; $i++) { ?>
