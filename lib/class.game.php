@@ -121,8 +121,7 @@ class Game implements JsonSerializable {
   }
 
   public function killPlayer(&$action_log) {
-    $action_log[] = array("action" => "message", "message" => "Your vision becomes blurry..");
-    $action_log[] = array("action" => "message", "message" => "A suspicious looking fairy picks you up and puts you in a even more suspicious looking van.");
+    $action_log[] = array("action" => "message", "message" => "The emergency fairy picks you up and brings you back into the forest.");
     $_SESSION["user"]->json_data["just_died"] = true;
     $_SESSION["user"]->save();
     $this->delete();
@@ -130,7 +129,7 @@ class Game implements JsonSerializable {
   }
   public function checkDeathMessage(&$action_log) {
     if (isset($_SESSION["user"]->json_data["just_died"])) {
-      $action_log[] = array("action" => "message", "message" => "You wake up in the fairy forest. Your butt kinda hurts..");
+      $action_log[] = array("action" => "message", "message" => "You wake up in the fairy forest. Please try to stay alive next time.");
       unset($_SESSION["user"]->json_data["just_died"]);
       $_SESSION["user"]->save();
     }
