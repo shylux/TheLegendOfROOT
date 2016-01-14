@@ -1,0 +1,46 @@
+{
+  "name": "mysterydungeon",
+  "sound": "inside_cave.mp3",
+  "width": 10,
+  "height": 10,
+  "terrain":[[16,16,16,16,16,16,16,16,16,16],[16,4,4,4,4,10,4,4,4,16],[16,4,10,4,4,4,4,4,10,16],[16,4,4,4,4,4,10,4,4,16],[16,4,4,4,10,4,4,4,4,16],[16,4,4,4,4,4,4,10,4,16],[16,4,10,4,4,10,4,4,4,16],[16,4,4,4,4,4,4,10,4,16],[16,4,4,4,10,4,4,4,4,16],[16,16,16,16,16,16,16,16,16,16]],
+  "entities": [
+    {
+      "type": "entrance", 
+      "x": 9,
+      "y": 9
+    },
+    {
+      "type": "exit",
+      "toDungeon": "deepforest", 
+      "number": 1,
+      "x": 9,
+      "y": 9
+    }, 
+    {
+      "type": "monster",
+      "name": "Unknown Monster",
+      "entranceText": "I see, you've found the path to me. Are you strong enough? We will see!",
+      "exitText": "Muhahaahahaha (evil laughing)!",
+      "class": 0,
+      "att": 2,
+      "def": 5,
+      "hp": 100,
+      "x": 1,
+      "y": 3,
+      "hidden": false
+    },
+    {
+      "type": "message",
+      "message": "Something in here is wrong... A strange feeling goes over your body...",
+      "x": 8,
+      "y": 9
+    },
+    {
+      "type": "message",
+      "message": "Did you hear that? You're not alone...",
+      "x": 9,
+      "y": 8
+    }
+  ]
+}
