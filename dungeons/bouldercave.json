@@ -34,6 +34,54 @@
       "y": 24
     },
     {
+      "type": "monster",
+      "name": "Boulder Man",
+      "entranceText": "I WILL CRUSH YOU.",
+      "exitText": "CRUSHED?",
+      "att": 5,
+      "def": 0,
+      "hp": 7,
+      "x": 18,
+      "y": 10,
+      "hidden": false
+    },
+    {
+      "type": "monster",
+      "name": "Molch",
+      "entranceText": "Blub?",
+      "exitText": "Blub!",
+      "att": 2,
+      "def": 2,
+      "hp": 15,
+      "x": 19,
+      "y": 5,
+      "hidden": false
+    },
+    {
+      "type": "monster",
+      "name": "Goblin",
+      "entranceText": "Gnanana",
+      "exitText": "GNARG!",
+      "att": 7,
+      "def": 0,
+      "hp": 5,
+      "x": 9,
+      "y": 7,
+      "hidden": false
+    },
+    {
+      "type": "monster",
+      "name": "Boogie Man",
+      "entranceText": "Woogie the boogie.",
+      "exitText": "CRUSHED?",
+      "att": 2,
+      "def": 0,
+      "hp": 12,
+      "x": 22,
+      "y": 21,
+      "hidden": false
+    },
+    {
       "type": "movePlayer",
       "direction": "up",
       "steps": 4,

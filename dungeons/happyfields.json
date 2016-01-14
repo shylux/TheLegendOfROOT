@@ -35,6 +35,19 @@
       "y": 35
     },
     {
+      "id": 1,
+      "type": "monster",
+      "name": "ROOT",
+      "entranceText": "#",
+      "exitText": "#",
+      "att": 1,
+      "def": 50,
+      "hp": 100,
+      "x": 36,
+      "y": 3,
+      "hidden": false
+    },
+    {
       "type": "exit",
       "toDungeon": "origin",
       "number": 1,
